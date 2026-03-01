@@ -1,0 +1,6 @@
+@Sigillum.Arcavis.Presentetion.WebApi.V1_HostAddress = http://localhost:5290
+
+GET {{Sigillum.Arcavis.Presentetion.WebApi.V1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

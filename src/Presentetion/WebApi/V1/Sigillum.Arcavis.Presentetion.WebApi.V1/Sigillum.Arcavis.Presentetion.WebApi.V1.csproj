@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>11ba6b05-3f84-414f-9d71-e09cffbc630d</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Core\Sigillum.Arcavis.Core.Application\Sigillum.Arcavis.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\Infrastructure\Persistence\Sigillum.Arcavis.Infrastructure.Persistence.EfCore\Sigillum.Arcavis.Infrastructure.Persistence.EfCore.csproj" />
+    <ProjectReference Include="..\..\..\..\Infrastructure\Persistence\Sigillum.Arcavis.Infrastructure.Persistence.RepoDb\Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.csproj" />
+  </ItemGroup>
+
+</Project>

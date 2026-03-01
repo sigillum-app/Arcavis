@@ -1,1 +1,25 @@
-<Solution />
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Core/">
+    <Project Path="src/Core/Sigillum.Arcavis.Core.Application/Sigillum.Arcavis.Core.Application.csproj" />
+    <Project Path="src/Core/Sigillum.Arcavis.Core.Domain/Sigillum.Arcavis.Core.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/" />
+  <Folder Name="/src/Infrastructure/Caching/">
+    <Project Path="src/Infrastructure/Caching/Sigillum.Arcavis.Infrastructure.Caching.Abstraction/Sigillum.Arcavis.Infrastructure.Caching.Abstraction.csproj" />
+    <Project Path="src/Infrastructure/Caching/Sigillum.Arcavis.Infrastructure.Caching/Sigillum.Arcavis.Infrastructure.Caching.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/Messaging/">
+    <Project Path="src/Infrastructure/Messaging/Sigillum.Arcavis.Infrastructure.Messaging.Abstraction/Sigillum.Arcavis.Infrastructure.Messaging.Abstraction.csproj" />
+    <Project Path="src/Infrastructure/Messaging/Sigillum.Arcavis.Infrastructure.Messaging/Sigillum.Arcavis.Infrastructure.Messaging.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/Persistence/">
+    <Project Path="src/Infrastructure/Persistence/Sigillum.Arcavis.Infrastructure.Persistence.EfCore/Sigillum.Arcavis.Infrastructure.Persistence.EfCore.csproj" />
+    <Project Path="src/Infrastructure/Persistence/Sigillum.Arcavis.Infrastructure.Persistence.RepoDb/Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.csproj" />
+  </Folder>
+  <Folder Name="/src/Presentetion/" />
+  <Folder Name="/src/Presentetion/WebApi/" />
+  <Folder Name="/src/Presentetion/WebApi/V1/">
+    <Project Path="src/Presentetion/WebApi/V1/Sigillum.Arcavis.Presentetion.WebApi.V1/Sigillum.Arcavis.Presentetion.WebApi.V1.csproj" />
+  </Folder>
+</Solution>
