@@ -1,6 +1,6 @@
 ﻿using Sigillum.Arcavis.Core.Domain.Entities.Base;
 using Sigillum.Arcavis.Core.Domain.Errors;
-using Sigillum.Arcavis.Core.Domain.Exceptions;
+using Sigillum.Arcavis.Core.Domain.ExceptionHandling;
 
 namespace Sigillum.Arcavis.Core.Domain.Entities;
 
@@ -11,33 +11,25 @@ public sealed class UserPasswordEntity : BaseEntity
 
     protected UserPasswordEntity() { }
 
-    private UserPasswordEntity(
+    public UserPasswordEntity(
         Guid id,
         Guid userId,
         string passwordHash) : base(id)
     {
-        UserId = userId;
-        PasswordHash = passwordHash;
-    }
-
-    public static UserPasswordEntity Create(Guid id, Guid userId, string passwordHash)
-    {
-        if (id == Guid.Empty)
-            throw new DomainException(DomainError.InvalidUserPasswordId);
-
         if (userId == Guid.Empty)
-            throw new DomainException(DomainError.InvalidUserId);
+            throw new DomainException(UserPasswordEntityError.InvalidUserId);
 
         if (string.IsNullOrWhiteSpace(passwordHash))
-            throw new DomainException(DomainError.InvalidUserPassword);
+            throw new DomainException(UserPasswordEntityError.InvalidPassword);
 
-        return new UserPasswordEntity(id, userId, passwordHash);
+        UserId = userId;
+        PasswordHash = passwordHash;
     }
 
     public void ChangePassword(string newPasswordHash)
     {
         if (string.IsNullOrWhiteSpace(newPasswordHash))
-            throw new DomainException(DomainError.InvalidUserPassword);
+            throw new DomainException(UserPasswordEntityError.InvalidPassword);
 
         PasswordHash = newPasswordHash;
     }

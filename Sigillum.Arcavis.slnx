@@ -17,9 +17,9 @@
     <Project Path="src/Infrastructure/Persistence/Sigillum.Arcavis.Infrastructure.Persistence.EfCore/Sigillum.Arcavis.Infrastructure.Persistence.EfCore.csproj" />
     <Project Path="src/Infrastructure/Persistence/Sigillum.Arcavis.Infrastructure.Persistence.RepoDb/Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.csproj" />
   </Folder>
-  <Folder Name="/src/Presentetion/" />
-  <Folder Name="/src/Presentetion/WebApi/" />
-  <Folder Name="/src/Presentetion/WebApi/V1/">
-    <Project Path="src/Presentetion/WebApi/V1/Sigillum.Arcavis.Presentetion.WebApi.V1/Sigillum.Arcavis.Presentetion.WebApi.V1.csproj" />
+  <Folder Name="/src/Presentation/" />
+  <Folder Name="/src/Presentation/WebApi/" />
+  <Folder Name="/src/Presentation/WebApi/V1/">
+    <Project Path="src/Presentation/WebApi/V1/Sigillum.Arcavis.Presentation.WebApi.V1/Sigillum.Arcavis.Presentation.WebApi.V1.csproj" />
   </Folder>
 </Solution>

@@ -5,7 +5,9 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 
 public sealed class ArcavisContext : DbContext
 {
-    public DbSet<UserEntity> UserEntities { get; set; }
+    public DbSet<UserEntity> Users{ get; set; }
+    public DbSet<UserEmailEntity> UserEmails { get; set; }
+    public DbSet<UserPasswordEntity> UserPasswords { get; set; }
 
     public ArcavisContext(DbContextOptions<ArcavisContext> options) : base(options)
     { }

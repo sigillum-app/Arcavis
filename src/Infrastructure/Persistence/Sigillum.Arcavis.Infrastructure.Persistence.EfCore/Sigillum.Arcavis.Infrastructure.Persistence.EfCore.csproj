@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Sigillum.Arcavis.Core.Application\Sigillum.Arcavis.Core.Application.csproj" />
     <ProjectReference Include="..\..\..\Core\Sigillum.Arcavis.Core.Domain\Sigillum.Arcavis.Core.Domain.csproj" />
   </ItemGroup>
 

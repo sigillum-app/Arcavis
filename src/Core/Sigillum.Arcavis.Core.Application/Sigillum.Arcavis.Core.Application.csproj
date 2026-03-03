@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\User\RegisterUser\" />
+    <ProjectReference Include="..\Sigillum.Arcavis.Core.Domain\Sigillum.Arcavis.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

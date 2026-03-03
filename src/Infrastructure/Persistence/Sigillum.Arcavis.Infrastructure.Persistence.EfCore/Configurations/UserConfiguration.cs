@@ -12,6 +12,6 @@ public class UserConfiguration : BaseConfiguration<UserEntity>
         base.Configure(builder);
         builder.ToTable("USER");
 
-        builder.Property(e => e.IsActive).HasDefaultValue(false);
+        builder.Property(e => e.IsActive).HasColumnName("IS_ACTIVE");
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Sigillum.Arcavis.Core.Domain.Entities.Base;
 using Sigillum.Arcavis.Core.Domain.Errors;
-using Sigillum.Arcavis.Core.Domain.Exceptions;
+using Sigillum.Arcavis.Core.Domain.ExceptionHandling;
 
 namespace Sigillum.Arcavis.Core.Domain.Entities;
 
@@ -12,29 +12,20 @@ public sealed class UserEmailEntity : BaseEntity
 
     protected UserEmailEntity() { }
 
-    private UserEmailEntity(
+    public UserEmailEntity(
         Guid id,
         Guid userId,
-        string email,
-        bool isVerified) : base(id)
+        string email) : base(id)
     {
-        UserId = userId;
-        Email = email.Trim().ToLowerInvariant();
-        IsVerified = isVerified;
-    }
-
-    public static UserEmailEntity Create(Guid id, Guid userId, string email)
-    {
-        if (id == Guid.Empty)
-            throw new DomainException(DomainError.InvalidUserEmailId);
-
         if (userId == Guid.Empty)
-            throw new DomainException(DomainError.InvalidUserId);
+            throw new DomainException(UserEmailEntityErrors.InvalidUserId);
 
         if (string.IsNullOrWhiteSpace(email))
-            throw new DomainException(DomainError.InvalidEmail);
+            throw new DomainException(UserEmailEntityErrors.InvalidEmail);
 
-        return new UserEmailEntity(id, userId, email, false);
+        UserId = userId;
+        Email = email.Trim().ToLowerInvariant();
+        IsVerified = false;
     }
 
     public void Verify()
@@ -45,7 +36,7 @@ public sealed class UserEmailEntity : BaseEntity
     public void ChangeEmail(string newEmail)
     {
         if (string.IsNullOrWhiteSpace(newEmail))
-            throw new DomainException(DomainError.InvalidEmail);
+            throw new DomainException(UserEmailEntityErrors.InvalidEmail);
 
         Email = newEmail.Trim().ToLowerInvariant();
         IsVerified = false;

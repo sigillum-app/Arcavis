@@ -1,5 +1,5 @@
 ﻿using Sigillum.Arcavis.Core.Domain.Errors;
-using Sigillum.Arcavis.Core.Domain.Exceptions;
+using Sigillum.Arcavis.Core.Domain.ExceptionHandling;
 
 namespace Sigillum.Arcavis.Core.Domain.Entities.Base;
 
@@ -18,7 +18,7 @@ public abstract class TenantEntity : BaseEntity
     protected void SetTenant(Guid tenantId)
     {
         if (tenantId == Guid.Empty)
-            throw new DomainException(DomainError.InvalidTenant);
+            throw new DomainException(TenantEntityErrors.InvalidTenant);
 
         TenantId = tenantId;
     }

@@ -1,6 +1,6 @@
 ﻿using Sigillum.Arcavis.Core.Domain.Entities.Base;
 using Sigillum.Arcavis.Core.Domain.Errors;
-using Sigillum.Arcavis.Core.Domain.Exceptions;
+using Sigillum.Arcavis.Core.Domain.ExceptionHandling;
 
 namespace Sigillum.Arcavis.Core.Domain.Entities;
 
@@ -10,26 +10,27 @@ public sealed class UserEntity : BaseEntity
 
     protected UserEntity() { }
 
-    private UserEntity(Guid id) : base(id)
-    {
-        IsActive = true;
-    }
-
-    public static UserEntity Create(Guid id)
+    public UserEntity(Guid id) : base(id)
     {
         if (id == Guid.Empty)
-            throw new DomainException(DomainError.InvalidUserId);
+            throw new DomainException(UserEntityErrors.InvalidUserId);
 
-        return new UserEntity(id);
+        IsActive = false;
     }
 
     public void Deactivate()
     {
+        if (!IsActive)
+            return;
+
         IsActive = false;
     }
 
     public void Activate()
     {
+        if (IsActive)
+            return;
+
         IsActive = true;
     }
 }

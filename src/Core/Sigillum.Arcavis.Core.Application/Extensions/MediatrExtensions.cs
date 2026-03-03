@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sigillum.Arcavis.Core.Application.Behaviors;
 using System.Reflection;
 
 namespace Sigillum.Arcavis.Core.Application.Extensions;
@@ -9,7 +10,13 @@ public static class MediatrExtensions
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
+        services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(assembly);
+
+                cfg.AddBehavior(typeof(TransactionBehavior<,>));
+            }
+        );
 
         return services;
     }
