@@ -1,13 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Sigillum.Arcavis.Core.Domain.Entities;
+using Sigillum.Arcavis.Core.Domain.Users;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 
 public sealed class ArcavisContext : DbContext
 {
-    public DbSet<UserEntity> Users{ get; set; }
-    public DbSet<UserEmailEntity> UserEmails { get; set; }
-    public DbSet<UserPasswordEntity> UserPasswords { get; set; }
+    public DbSet<User> Users{ get; set; }
 
     public ArcavisContext(DbContextOptions<ArcavisContext> options) : base(options)
     { }

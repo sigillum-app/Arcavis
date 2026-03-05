@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Sigillum.Arcavis.Core.Application.Behaviors;
+using Sigillum.Arcavis.Core.Application.Common.Behaviors;
 using System.Reflection;
 
 namespace Sigillum.Arcavis.Core.Application.Extensions;

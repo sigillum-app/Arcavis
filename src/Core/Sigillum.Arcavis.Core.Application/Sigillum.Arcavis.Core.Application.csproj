@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Sigillum.Arcavis.Core.Domain\Sigillum.Arcavis.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\User\Queries\" />
+  </ItemGroup>
+
 </Project>

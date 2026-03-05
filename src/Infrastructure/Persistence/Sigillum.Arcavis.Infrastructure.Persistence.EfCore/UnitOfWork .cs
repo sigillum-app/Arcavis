@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Sigillum.Arcavis.Core.Application.Abstraction.EfCore;
+using Sigillum.Arcavis.Core.Application.Abstraction;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore;
