@@ -1,5 +1,5 @@
-using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Extensions;
 using Sigillum.Arcavis.Core.Application.Extensions;
+using Sigillum.Arcavis.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddEfCoreRegistration(builder.Configuration);
-builder.Services.AddMediatrRegistration();
+builder.Services.AddInfrastructure(builder.Configuration)
+                .AddApplication();
 
 var app = builder.Build();
 

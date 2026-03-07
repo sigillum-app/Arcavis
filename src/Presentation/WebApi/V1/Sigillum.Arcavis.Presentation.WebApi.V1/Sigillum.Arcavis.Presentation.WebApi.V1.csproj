@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -19,13 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\Core\Sigillum.Arcavis.Core.Application\Sigillum.Arcavis.Core.Application.csproj" />
-    <ProjectReference Include="..\..\..\..\Infrastructure\Persistence\Sigillum.Arcavis.Infrastructure.Persistence.EfCore\Sigillum.Arcavis.Infrastructure.Persistence.EfCore.csproj" />
-    <ProjectReference Include="..\..\..\..\Infrastructure\Persistence\Sigillum.Arcavis.Infrastructure.Persistence.RepoDb\Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.csproj" />
+    <ProjectReference Include="..\..\..\..\Infrastructure\Sigillum.Arcavis.Infrastructure\Sigillum.Arcavis.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
