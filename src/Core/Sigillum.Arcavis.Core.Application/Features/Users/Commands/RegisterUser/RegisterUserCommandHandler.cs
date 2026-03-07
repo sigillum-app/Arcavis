@@ -4,7 +4,7 @@ using Sigillum.Arcavis.Core.Domain.Users;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 
-public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, Guid>
+public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, RegisterUserDto>
 {
     #region Dependencies
     private readonly IUserRepository _userRepository;
@@ -19,7 +19,7 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
     }
     #endregion
 
-    public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async Task<RegisterUserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var user = User.Register(
                         request.Email,
@@ -28,6 +28,6 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
 
         await _userRepository.AddAsync(user);
 
-        return user.Id.Value;
+        return new RegisterUserDto(user.Id.Value);
     }
 }
