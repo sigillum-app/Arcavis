@@ -4,6 +4,7 @@ using Sigillum.Arcavis.Core.Application.Contracts.Dispatcher;
 using Sigillum.Arcavis.Infrastructure.Dispatchers.MediatR;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Extensions;
 using Sigillum.Arcavis.Infrastructure.Security.Extensions;
+using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Extensions;
 
 namespace Sigillum.Arcavis.Infrastructure.Extensions;
 
@@ -12,6 +13,7 @@ public static class InfrastructureRegistration
     public static IServiceCollection AddInfrastructure(this  IServiceCollection services, IConfiguration configuration)
     {
         services.AddEfCoreRegistration(configuration)
+                .AddRepoDbRegistration(configuration)
                 .AddArgon2Registration();
 
         #region Dispatchers
