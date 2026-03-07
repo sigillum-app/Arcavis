@@ -8,13 +8,11 @@ public static class MediatrExtensions
 {
     public static IServiceCollection AddMediatrRegistration(this IServiceCollection services)
     {
-        var assembly = Assembly.GetExecutingAssembly();
-
         services.AddMediatR(cfg =>
             {
-                cfg.RegisterServicesFromAssembly(assembly);
+                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 
-                cfg.AddBehavior(typeof(TransactionBehavior<,>));
+                cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
             }
         );
 

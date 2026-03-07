@@ -4,14 +4,11 @@
     <Project Path="src/Core/Sigillum.Arcavis.Core.Application/Sigillum.Arcavis.Core.Application.csproj" />
     <Project Path="src/Core/Sigillum.Arcavis.Core.Domain/Sigillum.Arcavis.Core.Domain.csproj" />
   </Folder>
-  <Folder Name="/src/Infrastructure/" />
-  <Folder Name="/src/Infrastructure/Caching/">
-    <Project Path="src/Infrastructure/Caching/Sigillum.Arcavis.Infrastructure.Caching.Abstraction/Sigillum.Arcavis.Infrastructure.Caching.Abstraction.csproj" />
-    <Project Path="src/Infrastructure/Caching/Sigillum.Arcavis.Infrastructure.Caching/Sigillum.Arcavis.Infrastructure.Caching.csproj" />
-  </Folder>
-  <Folder Name="/src/Infrastructure/Messaging/">
-    <Project Path="src/Infrastructure/Messaging/Sigillum.Arcavis.Infrastructure.Messaging.Abstraction/Sigillum.Arcavis.Infrastructure.Messaging.Abstraction.csproj" />
-    <Project Path="src/Infrastructure/Messaging/Sigillum.Arcavis.Infrastructure.Messaging/Sigillum.Arcavis.Infrastructure.Messaging.csproj" />
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure.Cache/Sigillum.Arcavis.Infrastructure.Cache.csproj" Id="6658821d-cd7c-4610-a74f-a435f191bcc8" />
+    <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure.EventBus/Sigillum.Arcavis.Infrastructure.EventBus.csproj" Id="0abc0b8a-7027-4e28-9eeb-f7ef6346c5e4" />
+    <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure.Security/Sigillum.Arcavis.Infrastructure.Security.csproj" Id="b4d37aaa-d775-4d82-a586-3bea2abb6b7c" />
+    <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure/Sigillum.Arcavis.Infrastructure.csproj" Id="511c5110-08b9-4fb8-9327-12b269485992" />
   </Folder>
   <Folder Name="/src/Infrastructure/Persistence/">
     <Project Path="src/Infrastructure/Persistence/Sigillum.Arcavis.Infrastructure.Persistence.EfCore/Sigillum.Arcavis.Infrastructure.Persistence.EfCore.csproj" />

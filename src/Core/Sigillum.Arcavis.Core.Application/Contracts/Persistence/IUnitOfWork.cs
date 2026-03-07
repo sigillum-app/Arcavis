@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.Abstraction;
+﻿namespace Sigillum.Arcavis.Core.Application.Contracts.Persistence;
 
 public interface IUnitOfWork
 {
