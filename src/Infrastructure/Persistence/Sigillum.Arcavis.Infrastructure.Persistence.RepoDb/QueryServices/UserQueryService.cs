@@ -1,7 +1,7 @@
 ﻿using RepoDb;
+using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+using Sigillum.Arcavis.Core.Application.Abstraction.ROM.Users.Base;
 using Sigillum.Arcavis.Core.Application.Common.Pagination;
-using Sigillum.Arcavis.Core.Application.Contracts.Persistence.QueryServices;
-using Sigillum.Arcavis.Core.Application.ROMs.Users.Base;
 using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Connection;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.QueryServices;

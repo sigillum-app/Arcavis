@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Sigillum.Arcavis.Core.Application.Contracts.Persistence;
+using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 using Sigillum.Arcavis.Core.Application.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Common.Behaviors;

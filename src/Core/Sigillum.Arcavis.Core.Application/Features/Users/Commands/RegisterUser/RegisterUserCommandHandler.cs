@@ -1,4 +1,5 @@
-﻿using Sigillum.Arcavis.Core.Application.Contracts.Security.Hasher;
+﻿using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
+using Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
 using Sigillum.Arcavis.Core.Application.CQRS;
 using Sigillum.Arcavis.Core.Domain.Users;
 
@@ -9,13 +10,16 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
     #region Dependencies
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher _passwordHasher;
+    private readonly IEventPublisher _eventPublisher;
 
     public RegisterUserCommandHandler(
-        IUserRepository userRepository, 
-        IPasswordHasher passwordHasher)
+        IUserRepository userRepository,
+        IPasswordHasher passwordHasher,
+        IEventPublisher eventPublisher)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
+        _eventPublisher = eventPublisher;
     }
     #endregion
 
@@ -27,6 +31,11 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
                    );
 
         await _userRepository.AddAsync(user);
+
+        foreach (var domainEvent in user.DomainEvents)
+            await _eventPublisher.PublishAsync(domainEvent, cancellationToken);
+
+        user.ClearDomainEvents();
 
         return new RegisterUserDto(user.Id.Value);
     }

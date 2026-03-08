@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Sigillum.Arcavis.Core.Application.Contracts.Dispatcher;
 using Sigillum.Arcavis.Infrastructure.Dispatchers.MediatR;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Extensions;
 using Sigillum.Arcavis.Infrastructure.Security.Extensions;
 using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Extensions;
+using Sigillum.Arcavis.Core.Application.Abstraction.Dispatcher;
 
 namespace Sigillum.Arcavis.Infrastructure.Extensions;
 
