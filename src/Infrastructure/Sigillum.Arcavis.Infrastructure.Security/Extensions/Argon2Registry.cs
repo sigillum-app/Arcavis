@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Sigillum.Arcavis.Core.Application.Contracts.Security.Hasher;
+using Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
 using Sigillum.Arcavis.Infrastructure.Security.Hashing;
 
 namespace Sigillum.Arcavis.Infrastructure.Security.Extensions;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sigillum.Arcavis.Core.Application.Contracts.Dispatcher;
+using Sigillum.Arcavis.Core.Application.Abstraction.Dispatcher;
 using Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 using Sigillum.Arcavis.Core.Application.Features.Users.Queries.GetAllUsers;
 

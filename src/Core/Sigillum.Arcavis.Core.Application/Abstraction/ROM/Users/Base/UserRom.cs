@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.ROMs.Users.Base;
+﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.ROM.Users.Base;
 
 public sealed record UserRom
 {

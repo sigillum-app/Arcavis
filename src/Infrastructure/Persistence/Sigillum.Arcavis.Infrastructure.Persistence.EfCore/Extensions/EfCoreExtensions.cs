@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Sigillum.Arcavis.Core.Application.Contracts.Persistence;
+using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 using Sigillum.Arcavis.Core.Domain.Users;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Repositories;

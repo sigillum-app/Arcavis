@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Sigillum.Arcavis.Core.Application.Contracts.Dispatcher;
+using Sigillum.Arcavis.Core.Application.Abstraction.Dispatcher;
 using Sigillum.Arcavis.Core.Application.CQRS;
 
 namespace Sigillum.Arcavis.Infrastructure.Dispatchers.MediatR;
