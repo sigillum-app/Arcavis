@@ -12,7 +12,7 @@ using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
 {
     [DbContext(typeof(ArcavisContext))]
-    [Migration("20260305140235_InitialCreate")]
+    [Migration("20260308124511_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -63,6 +63,68 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
                     b.ToTable("USER", (string)null);
                 });
 
+            modelBuilder.Entity("Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("ID")
+                        .HasColumnOrder(0);
+
+                    b.Property<DateTime>("CREATED_AT")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(2);
+
+                    b.Property<Guid?>("CREATED_BY")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Error")
+                        .HasColumnType("text")
+                        .HasColumnName("ERROR")
+                        .HasColumnOrder(10);
+
+                    b.Property<bool>("IS_DELETED")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("OccurredAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("OCCURRED_AT")
+                        .HasColumnOrder(8);
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("PAYLOAD")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime?>("ProcessedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("PROCESSED_AT")
+                        .HasColumnOrder(9);
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("TYPE")
+                        .HasColumnOrder(6);
+
+                    b.Property<DateTime>("UPDATED_AT")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnOrder(4);
+
+                    b.Property<Guid?>("UPDATED_BY")
+                        .HasColumnType("uuid")
+                        .HasColumnOrder(3);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OUTBOX_MESSAGE", (string)null);
+                });
+
             modelBuilder.Entity("Sigillum.Arcavis.Core.Domain.Users.User", b =>
                 {
                     b.OwnsMany("Sigillum.Arcavis.Core.Domain.Users.Emails.Email", "_emails", b1 =>
@@ -72,36 +134,14 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
                                 .HasColumnName("ID")
                                 .HasColumnOrder(0);
 
-                            b1.Property<DateTime>("CREATED_AT")
-                                .HasColumnType("timestamp with time zone")
-                                .HasColumnOrder(2);
-
-                            b1.Property<Guid?>("CREATED_BY")
-                                .HasColumnType("uuid")
-                                .HasColumnOrder(1);
-
                             b1.Property<string>("EmailAddress")
                                 .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("EMAIL");
 
-                            b1.Property<bool>("IS_DELETED")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("boolean")
-                                .HasDefaultValue(false)
-                                .HasColumnOrder(5);
-
                             b1.Property<bool>("IsVerified")
                                 .HasColumnType("boolean")
                                 .HasColumnName("IS_VERIFIED");
-
-                            b1.Property<DateTime>("UPDATED_AT")
-                                .HasColumnType("timestamp with time zone")
-                                .HasColumnOrder(4);
-
-                            b1.Property<Guid?>("UPDATED_BY")
-                                .HasColumnType("uuid")
-                                .HasColumnOrder(3);
 
                             b1.Property<Guid?>("USER_ID")
                                 .HasColumnType("uuid");
@@ -126,32 +166,10 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
                                 .HasColumnName("ID")
                                 .HasColumnOrder(0);
 
-                            b1.Property<DateTime>("CREATED_AT")
-                                .HasColumnType("timestamp with time zone")
-                                .HasColumnOrder(2);
-
-                            b1.Property<Guid?>("CREATED_BY")
-                                .HasColumnType("uuid")
-                                .HasColumnOrder(1);
-
-                            b1.Property<bool>("IS_DELETED")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("boolean")
-                                .HasDefaultValue(false)
-                                .HasColumnOrder(5);
-
                             b1.Property<string>("PasswordHash")
                                 .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("PASSWORD_HASH");
-
-                            b1.Property<DateTime>("UPDATED_AT")
-                                .HasColumnType("timestamp with time zone")
-                                .HasColumnOrder(4);
-
-                            b1.Property<Guid?>("UPDATED_BY")
-                                .HasColumnType("uuid")
-                                .HasColumnOrder(3);
 
                             b1.Property<Guid?>("USER_ID")
                                 .HasColumnType("uuid");

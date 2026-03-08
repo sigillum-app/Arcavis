@@ -12,6 +12,27 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "OUTBOX_MESSAGE",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uuid", nullable: false),
+                    CREATED_BY = table.Column<Guid>(type: "uuid", nullable: true),
+                    CREATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UPDATED_BY = table.Column<Guid>(type: "uuid", nullable: true),
+                    UPDATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IS_DELETED = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    TYPE = table.Column<string>(type: "text", nullable: false),
+                    PAYLOAD = table.Column<string>(type: "text", nullable: false),
+                    OCCURRED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PROCESSED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ERROR = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OUTBOX_MESSAGE", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "USER",
                 columns: table => new
                 {
@@ -33,11 +54,6 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uuid", nullable: false),
-                    CREATED_BY = table.Column<Guid>(type: "uuid", nullable: true),
-                    CREATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UPDATED_BY = table.Column<Guid>(type: "uuid", nullable: true),
-                    UPDATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IS_DELETED = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     EMAIL = table.Column<string>(type: "text", nullable: false),
                     IS_VERIFIED = table.Column<bool>(type: "boolean", nullable: false),
                     USER_ID = table.Column<Guid>(type: "uuid", nullable: true)
@@ -58,11 +74,6 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uuid", nullable: false),
-                    CREATED_BY = table.Column<Guid>(type: "uuid", nullable: true),
-                    CREATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UPDATED_BY = table.Column<Guid>(type: "uuid", nullable: true),
-                    UPDATED_AT = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IS_DELETED = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     PASSWORD_HASH = table.Column<string>(type: "text", nullable: false),
                     USER_ID = table.Column<Guid>(type: "uuid", nullable: true)
                 },
@@ -97,6 +108,9 @@ namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "OUTBOX_MESSAGE");
+
             migrationBuilder.DropTable(
                 name: "USER_EMAIL");
 

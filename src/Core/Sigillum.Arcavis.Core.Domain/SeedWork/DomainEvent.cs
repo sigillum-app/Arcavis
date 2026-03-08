@@ -3,5 +3,5 @@
 public abstract record DomainEvent
 {
     public Guid EventId { get; } = Guid.NewGuid();
-    public DateTime OccuredAt { get; } = DateTime.UtcNow;
+    public DateTime OccurredAt { get; } = DateTime.UtcNow;
 }
