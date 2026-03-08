@@ -18,8 +18,9 @@ public static class EfCoreExtensions
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
 
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
