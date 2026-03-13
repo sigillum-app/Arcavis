@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
@@ -11,9 +12,11 @@ using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Migrations
 {
     [DbContext(typeof(ArcavisContext))]
-    partial class ArcavisContextModelSnapshot : ModelSnapshot
+    [Migration("20260312114140_OutboxRetries")]
+    partial class OutboxRetries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

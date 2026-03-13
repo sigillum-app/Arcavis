@@ -9,14 +9,11 @@ public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly ArcavisContext _context;
     private IDbContextTransaction? _currentTransaction;
-    private IDomainEventsDispatcher _domainEventsDispatcher;
 
     public UnitOfWork(
-        ArcavisContext context, 
-        IDomainEventsDispatcher domainEventsDispatcher)
+        ArcavisContext context)
     {
         _context = context;
-        _domainEventsDispatcher = domainEventsDispatcher;
     }
 
     public bool HasActiveTransaction => _currentTransaction is not null;
@@ -37,7 +34,6 @@ public sealed class UnitOfWork : IUnitOfWork
             {
                 var result = await action(cancellationToken);
 
-                await _domainEventsDispatcher.DispatchAsync(cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
 
@@ -67,7 +63,6 @@ public sealed class UnitOfWork : IUnitOfWork
 
         try
         {
-            await _domainEventsDispatcher.DispatchAsync(cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             await _currentTransaction.CommitAsync(cancellationToken);
         }

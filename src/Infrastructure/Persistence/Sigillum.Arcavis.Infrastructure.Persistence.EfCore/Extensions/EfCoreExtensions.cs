@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
 using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 using Sigillum.Arcavis.Core.Domain.Users;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
+using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Outbox;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Repositories;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Extensions;
@@ -18,8 +20,7 @@ public static class EfCoreExtensions
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
-
+        services.AddScoped<IOutboxService, OutboxService>();
         services.AddScoped<IUserRepository, UserRepository>();
 
         return services;

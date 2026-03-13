@@ -21,5 +21,8 @@ internal sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<Outb
         builder.Property(x => x.OccurredAt).HasColumnName("OCCURRED_AT").HasColumnOrder(8);
         builder.Property(x => x.ProcessedAt).HasColumnName("PROCESSED_AT").HasColumnOrder(9);
         builder.Property(x => x.Error).HasColumnName("ERROR").HasColumnOrder(10);
+        builder.Property(x => x.RetryCount).HasColumnName("RETRY_COUNT").HasColumnOrder(11);
+        builder.Property(x => x.MaxRetryCount).HasColumnName("MAX_RETRY_COUNT").HasColumnOrder(12);
+        builder.Property(x => x.NextRetryAt).HasColumnName("NEXT_RETRY_AT").HasColumnOrder(13);
     }
 }
