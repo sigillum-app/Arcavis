@@ -4,5 +4,5 @@
 
 //public interface IEventPublisher
 //{
-//    Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : DomainEvent;
+//    Task PublishAsync(string topic, string payload, CancellationToken cancellationToken = default);
 //}

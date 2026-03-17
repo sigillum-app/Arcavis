@@ -10,11 +10,9 @@ public sealed class User : Entity, IAggregateRoot
 {
     private readonly List<Email> _emails = new();
     private readonly List<Password> _passwords = new();
-    private readonly List<DomainEvent> _domainEvents = new();
 
     public IReadOnlyCollection<Email> Emails => _emails;
     public IReadOnlyCollection<Password> Passwords => _passwords;
-    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents;
 
     public UserId Id { get; private set; }
     public bool IsActive { get; private set; }
