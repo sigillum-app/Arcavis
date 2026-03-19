@@ -17,9 +17,10 @@ public static class RepoDbExtensions
             .UsePostgreSql();
 
         UserRomMap.Configure();
-
+        OutboxRomMap.Configure();
 
         services.AddScoped<IUserQueryService, UserQueryService>();
+        services.AddScoped<IOutboxQueryService, OutboxQueryService>();
 
         var connectionString = configuration.GetConnectionString("PostgreSqlConnection");
 

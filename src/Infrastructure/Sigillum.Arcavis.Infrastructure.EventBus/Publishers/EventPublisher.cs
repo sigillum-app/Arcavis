@@ -1,22 +1,49 @@
-﻿//using MassTransit;
-//using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
-//using Sigillum.Arcavis.Infrastructure.EventBus.Common;
+﻿using MassTransit;
+using Microsoft.Extensions.Logging;
+using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
+using Sigillum.Arcavis.Core.Application.Abstraction.Events;
+using System.Text.Json;
 
-//namespace Sigillum.Arcavis.Infrastructure.EventBus.Publishers;
+namespace Sigillum.Arcavis.Infrastructure.EventBus.Publishers;
 
-//internal sealed class EventPublisher : IEventPublisher
-//{
-//    private readonly IProducerProvider _producerProvider;
+internal class EventPublisher : IEventPublisher
+{
+    #region Dependencies
+    private readonly IPublishEndpoint _publishEndpoint;
+    private readonly ILogger<EventPublisher> _logger;
+    private readonly Dictionary<string, Type> _typeMap;
 
-//    public EventPublisher(IProducerProvider producerProvider)
-//    {
-//        _producerProvider = producerProvider;
-//    }
+    public EventPublisher(
+        IPublishEndpoint publishEndpoint,
+        IEnumerable<IIntegrationEventMapper> mappers,
+        ILogger<EventPublisher> logger)
+    {
+        _publishEndpoint = publishEndpoint;
+        _logger = logger;
+        _typeMap = mappers.ToDictionary(
+            m => m.EventName,
+            m => m.IntegrationEventType);
+    }
 
-//    public async Task PublishAsync(string type, string payload, CancellationToken cancellationToken = default)
-//    {
-//        var topic = TopicNameConvention.GetTopicName(type);
-//        var producer = _producerProvider.GetProducer<string, string>(topic);
-//        await producer.Produce(topic, payload, cancellationToken);
-//    }
-//}
+    #endregion
+
+    public async Task PublishAsync(string eventType, string payload, CancellationToken cancellationToken = default)
+    {
+        if (!_typeMap.TryGetValue(eventType, out var type))
+        {
+            _logger.LogWarning("No integration event type found for {EventType}", eventType);
+            return;
+        }
+
+        var integrationEvent = JsonSerializer.Deserialize(payload, type);
+
+        if (integrationEvent is null)
+        {
+            _logger.LogWarning("Failed to deserialize payload for {EventType}", eventType);
+            return;
+        }
+
+        await _publishEndpoint.Publish(integrationEvent, type, cancellationToken);
+    }
+
+}

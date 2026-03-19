@@ -3,7 +3,7 @@ using Sigillum.Arcavis.Core.Application.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Queries.GetAllUsers;
 
-public sealed class GetAllUsersQueryHandler : IQueryHandler<GetAllUsersQuery, IReadOnlyList<GetAllUsersDto>>
+internal sealed class GetAllUsersQueryHandler : IQueryHandler<GetAllUsersQuery, IReadOnlyList<GetAllUsersDto>>
 {
     private readonly IUserQueryService _userQueryService;
 

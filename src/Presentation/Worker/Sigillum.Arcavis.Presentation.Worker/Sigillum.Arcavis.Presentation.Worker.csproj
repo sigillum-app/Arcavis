@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Sigillum.Arcavis.Presentation.Worker-4d4b0f7e-2692-43af-a377-81fd2eb2c89c</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Sigillum.Arcavis.Core.Application\Sigillum.Arcavis.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Sigillum.Arcavis.Infrastructure\Sigillum.Arcavis.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

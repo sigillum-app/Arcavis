@@ -1,8 +1,6 @@
-﻿//using Sigillum.Arcavis.Core.Domain.SeedWork;
+﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
 
-//namespace Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
-
-//public interface IEventPublisher
-//{
-//    Task PublishAsync(string topic, string payload, CancellationToken cancellationToken = default);
-//}
+public interface IEventPublisher
+{
+    Task PublishAsync(string eventType, string payload, CancellationToken cancellationToken = default);
+}

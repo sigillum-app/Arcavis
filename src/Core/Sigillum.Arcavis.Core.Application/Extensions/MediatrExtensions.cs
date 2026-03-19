@@ -13,6 +13,7 @@ public static class MediatrExtensions
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 
                 cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+                cfg.AddOpenBehavior(typeof(DomainEventToOutboxBehavior<,>));
             }
         );
 

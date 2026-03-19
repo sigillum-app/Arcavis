@@ -22,6 +22,11 @@ public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
+        if (request is IManualTransactionRequest)
+        {
+            return await next();
+        }
+
         var requestName = typeof(TRequest).Name;
 
         try

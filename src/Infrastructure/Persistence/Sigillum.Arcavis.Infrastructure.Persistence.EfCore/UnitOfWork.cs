@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
+using Sigillum.Arcavis.Core.Domain.SeedWork;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore;
@@ -86,6 +87,24 @@ public sealed class UnitOfWork : IUnitOfWork
         {
             await _currentTransaction.DisposeAsync();
             _currentTransaction = null;
+        }
+    }
+
+    public IEnumerable<DomainEvent> GetDomainEvents()
+    {
+        return _context.ChangeTracker
+            .Entries<IAggregateRoot>()
+            .SelectMany(x => x.Entity.DomainEvents);
+    }
+
+    public void ClearDomainEvents()
+    {
+        var entities = _context.ChangeTracker
+            .Entries<IAggregateRoot>();
+
+        foreach (var entity in entities)
+        {
+            entity.Entity.ClearDomainEvents();
         }
     }
 }

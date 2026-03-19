@@ -1,0 +1,49 @@
+﻿using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
+using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
+using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
+using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+using Sigillum.Arcavis.Core.Application.CQRS;
+
+namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.ProcessMessages;
+
+internal sealed class ProcessMessagesCommandHandler : ICommandHandler<ProcessMessagesCommand>
+{
+    private readonly IOutboxQueryService _outboxQueryService;
+    private readonly IOutboxService _outboxService;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IEventPublisher _eventPublisher;
+
+    public ProcessMessagesCommandHandler(
+        IOutboxQueryService outboxQueryService,
+        IOutboxService outboxService,
+        IUnitOfWork unitOfWork,
+        IEventPublisher eventPublisher)
+    {
+        _outboxQueryService = outboxQueryService;
+        _outboxService = outboxService;
+        _unitOfWork = unitOfWork;
+        _eventPublisher = eventPublisher;
+    }
+
+    public async Task Handle(ProcessMessagesCommand request, CancellationToken cancellationToken)
+    {
+        var messages = await _outboxQueryService.GetUnprocessedMessagesAsync(20, cancellationToken);
+
+        foreach (var message in messages)
+        {
+            try
+            {
+                await _eventPublisher.PublishAsync(message.Type, message.Payload, cancellationToken);
+                await _outboxService.MarkAsProcessedAsync(message.Id, cancellationToken);
+
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                await _outboxService.MarkAsFailedAsync(message.Id, ex.Message, cancellationToken);
+
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
+            }
+        }
+    }
+}

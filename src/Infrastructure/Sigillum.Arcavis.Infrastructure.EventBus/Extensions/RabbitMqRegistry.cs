@@ -1,12 +1,14 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
+using Sigillum.Arcavis.Infrastructure.EventBus.Publishers;
 
 namespace Sigillum.Arcavis.Infrastructure.EventBus.Extensions;
 
-public static class MessagingExtensions
+public static class RabbitMqRegistry
 {
-    public static IServiceCollection AddEventBusRegistration(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddRabbitMqRegistration(this IServiceCollection services, IConfiguration configuration)
     {
         var host = configuration["RabbitMQ:Host"]!;
         var username = configuration["RabbitMQ:Username"]!;
@@ -26,6 +28,10 @@ public static class MessagingExtensions
             });
         });
 
+        services.AddScoped<IEventPublisher, EventPublisher>();
+
         return services;
+
     }
+
 }

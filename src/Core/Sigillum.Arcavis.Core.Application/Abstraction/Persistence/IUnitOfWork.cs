@@ -1,4 +1,6 @@
-﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
+﻿using Sigillum.Arcavis.Core.Domain.SeedWork;
+
+namespace Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 
 public interface IUnitOfWork
 {
@@ -8,4 +10,6 @@ public interface IUnitOfWork
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
     Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
     bool HasActiveTransaction { get; }
+    IEnumerable<DomainEvent> GetDomainEvents();
+    void ClearDomainEvents();
 }

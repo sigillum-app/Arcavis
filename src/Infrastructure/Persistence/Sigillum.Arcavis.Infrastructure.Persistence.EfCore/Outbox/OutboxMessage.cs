@@ -2,17 +2,17 @@
 
 public sealed class OutboxMessage
 {
-    public Guid Id { get; private set; }
-    public string Type { get; private set; }
-    public string Payload { get; private set; }
-    public DateTime OccurredAt { get; private set; }
-    public DateTime? ProcessedAt { get; private set; }
-    public string? Error { get; private set; }
-    public int RetryCount { get; private set; }
-    public int MaxRetryCount { get; private set; }
-    public DateTime? NextRetryAt { get; private set; }
+    public Guid Id { get; set; }
+    public string Type { get; set; } = string.Empty;
+    public string Payload { get; set; } = string.Empty;
+    public DateTime OccurredAt { get; set; }
+    public DateTime? ProcessedAt { get; set; }
+    public string? Error { get; set; }
+    public int RetryCount { get; set; }
+    public int MaxRetryCount { get; set; } = 3;
+    public DateTime? NextRetryAt { get; set; }
 
-    private OutboxMessage() { }
+    public OutboxMessage() { }
 
     public OutboxMessage(string type, string payload, DateTime occurredAt)
     {
@@ -20,7 +20,6 @@ public sealed class OutboxMessage
         Type = type;
         Payload = payload;
         OccurredAt = occurredAt;
-        NextRetryAt = DateTime.UtcNow;
-        MaxRetryCount = 3;
+        NextRetryAt = occurredAt;
     }
 }

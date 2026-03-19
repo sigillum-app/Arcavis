@@ -6,7 +6,7 @@
   </Folder>
   <Folder Name="/src/Infrastructure/">
     <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure.Cache/Sigillum.Arcavis.Infrastructure.Cache.csproj" Id="6658821d-cd7c-4610-a74f-a435f191bcc8" />
-    <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure.EventBus/Sigillum.Arcavis.Infrastructure.EventBus.csproj" Id="0abc0b8a-7027-4e28-9eeb-f7ef6346c5e4" />
+    <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure.EventBus/Sigillum.Arcavis.Infrastructure.EventBus.csproj" Id="6a7052a0-88e4-4a8c-b380-48cd3986d035" />
     <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure.Security/Sigillum.Arcavis.Infrastructure.Security.csproj" Id="b4d37aaa-d775-4d82-a586-3bea2abb6b7c" />
     <Project Path="src/Infrastructure/Sigillum.Arcavis.Infrastructure/Sigillum.Arcavis.Infrastructure.csproj" Id="511c5110-08b9-4fb8-9327-12b269485992" />
   </Folder>
@@ -18,5 +18,8 @@
   <Folder Name="/src/Presentation/WebApi/" />
   <Folder Name="/src/Presentation/WebApi/V1/">
     <Project Path="src/Presentation/WebApi/V1/Sigillum.Arcavis.Presentation.WebApi.V1/Sigillum.Arcavis.Presentation.WebApi.V1.csproj" />
+  </Folder>
+  <Folder Name="/src/Presentation/Worker/">
+    <Project Path="src/Presentation/Worker/Sigillum.Arcavis.Presentation.Worker/Sigillum.Arcavis.Presentation.Worker.csproj" Id="525ae4fb-4659-4ee2-baed-3ca95357e6ae" />
   </Folder>
 </Solution>
