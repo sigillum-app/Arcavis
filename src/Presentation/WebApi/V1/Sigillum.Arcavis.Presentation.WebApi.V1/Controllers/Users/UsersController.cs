@@ -9,12 +9,12 @@ namespace Sigillum.Arcavis.Presentation.WebApi.V1.Controllers.Users;
 [ApiController]
 public class UsersController : ControllerBase
 {
-    private readonly ICommandDispatcher _commandDispatcher;
-    private readonly IQueryDispatcher _queryDispatcher;
+    private readonly IAppCommandDispatcher _commandDispatcher;
+    private readonly IAppQueryDispatcher _queryDispatcher;
 
     public UsersController(
-        ICommandDispatcher commandDispatcher, 
-        IQueryDispatcher queryDispatcher)
+        IAppCommandDispatcher commandDispatcher, 
+        IAppQueryDispatcher queryDispatcher)
     {
         _commandDispatcher = commandDispatcher;
         _queryDispatcher = queryDispatcher;

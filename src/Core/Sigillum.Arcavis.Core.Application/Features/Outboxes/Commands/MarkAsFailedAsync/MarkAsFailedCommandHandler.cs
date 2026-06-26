@@ -1,9 +1,9 @@
 ﻿using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
-using Sigillum.Arcavis.Core.Application.CQRS;
+using Sigillum.Arcavis.Core.Application.Common.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.MarkAsFailedAsync;
 
-internal sealed class MarkAsFailedCommandHandler : ICommandHandler<MarkAsFailedCommand>
+internal sealed class MarkAsFailedCommandHandler : IAppCommandHandler<MarkAsFailedCommand>
 {
     private readonly IOutboxService _outboxService;
 
@@ -12,8 +12,10 @@ internal sealed class MarkAsFailedCommandHandler : ICommandHandler<MarkAsFailedC
         _outboxService = outboxService;
     }
 
-    public async Task Handle(MarkAsFailedCommand request, CancellationToken cancellationToken)
+    public async ValueTask<Unit> Handle(MarkAsFailedCommand request, CancellationToken cancellationToken)
     {
         await _outboxService.MarkAsFailedAsync(request.Id, request.Error, cancellationToken);
+
+        return Unit.Value;
     }
 }

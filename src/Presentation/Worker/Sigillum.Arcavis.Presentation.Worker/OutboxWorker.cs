@@ -7,7 +7,7 @@ public class OutboxWorker : BackgroundService
 {
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILogger<OutboxWorker> _logger;
-    private readonly TimeSpan _interval = TimeSpan.FromSeconds(100);
+    private readonly TimeSpan _interval = TimeSpan.FromSeconds(1);
 
     public OutboxWorker(IServiceScopeFactory scopeFactory, ILogger<OutboxWorker> logger)
     {
@@ -22,7 +22,7 @@ public class OutboxWorker : BackgroundService
             try
             {
                 using var scope = _scopeFactory.CreateScope();
-                var dispatcher = scope.ServiceProvider.GetRequiredService<ICommandDispatcher>();
+                var dispatcher = scope.ServiceProvider.GetRequiredService<IAppCommandDispatcher>();
                 await dispatcher.SendAsync(new ProcessMessagesCommand(), stoppingToken);
             }
             catch (Exception ex)

@@ -1,11 +1,10 @@
-﻿using MediatR;
+﻿using Mediator;
 using Microsoft.Extensions.Logging;
 using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
-using Sigillum.Arcavis.Core.Application.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Common.Behaviors;
 
-public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, IMessage
 {
     #region Dependencies
     private readonly IUnitOfWork _unitOfWork;
@@ -20,11 +19,11 @@ public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
     }
     #endregion
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async ValueTask<TResponse> Handle(TRequest request, MessageHandlerDelegate<TRequest, TResponse> next, CancellationToken cancellationToken)
     {
         if (request is IManualTransactionRequest)
         {
-            return await next();
+            return await next(request, cancellationToken);
         }
 
         var requestName = typeof(TRequest).Name;
@@ -35,7 +34,7 @@ public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TReque
             {
                 _logger.LogInformation("--- Begin transaction for {RequestName}", requestName);
 
-                var response = await next();
+                var response = await next(request, cancellationToken);
 
                 _logger.LogInformation("--- Commit transaction for {RequestName}", requestName);
 

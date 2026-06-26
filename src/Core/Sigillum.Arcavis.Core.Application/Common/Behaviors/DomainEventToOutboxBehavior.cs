@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using Mediator;
 using Microsoft.Extensions.Logging;
 using Sigillum.Arcavis.Core.Application.Abstraction.Events;
 using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace Sigillum.Arcavis.Core.Application.Common.Behaviors;
 
-public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, IMessage
 {
     #region Dependencies
     private readonly IOutboxService _outbox;
@@ -28,18 +28,15 @@ public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavio
     }
     #endregion
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async ValueTask<TResponse> Handle(TRequest message,MessageHandlerDelegate<TRequest, TResponse> next, CancellationToken cancellationToken)
     {
-        var response = await next();
+        var response = await next(message, cancellationToken);
 
         var domainEvents = _uow.GetDomainEvents().ToList();
 
-        var requestName = typeof(TRequest).Name;
-
-
         foreach (var domainEvent in domainEvents)
         {
-            _logger.LogInformation("--- Begin Outbox for {RequestName}", domainEvent);
+            _logger.LogInformation("--- Begin Outbox for {EventName}", domainEvent.GetType().Name);
 
             if (!_mapperDict.TryGetValue(domainEvent.GetType(), out var mapper))
                 continue;
@@ -52,11 +49,12 @@ public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavio
                 domainEvent.OccurredAt,
                 cancellationToken);
 
-            _logger.LogInformation("--- End Outbox for {RequestName}", domainEvent);
+            _logger.LogInformation("--- End Outbox for {EventName}", domainEvent.GetType().Name);
         }
 
         _uow.ClearDomainEvents();
 
         return response;
     }
+
 }

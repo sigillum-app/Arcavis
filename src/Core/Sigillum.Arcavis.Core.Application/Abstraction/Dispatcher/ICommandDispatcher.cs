@@ -1,10 +1,10 @@
-﻿using Sigillum.Arcavis.Core.Application.CQRS;
+﻿using Sigillum.Arcavis.Core.Application.Common.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Abstraction.Dispatcher;
 
-public interface ICommandDispatcher
+public interface IAppCommandDispatcher
 {
-    Task SendAsync(ICommand command, CancellationToken cancellationToken = default);
+    ValueTask SendAsync(IAppCommand command, CancellationToken cancellationToken = default);
 
-    Task<TResult> SendAsync<TResult>(ICommand<TResult> command, CancellationToken cancellationToken = default);
+    ValueTask<TResult> SendAsync<TResult>(IAppCommand<TResult> command, CancellationToken cancellationToken = default);
 }

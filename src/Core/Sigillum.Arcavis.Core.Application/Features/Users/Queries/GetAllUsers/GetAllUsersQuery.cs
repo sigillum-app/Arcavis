@@ -1,5 +1,5 @@
-﻿using Sigillum.Arcavis.Core.Application.CQRS;
+﻿using Sigillum.Arcavis.Core.Application.Common.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Queries.GetAllUsers;
 
-public class GetAllUsersQuery : IQuery<IReadOnlyList<GetAllUsersDto>>;
+public class GetAllUsersQuery : IAppQuery<IReadOnlyList<GetAllUsersDto>>;

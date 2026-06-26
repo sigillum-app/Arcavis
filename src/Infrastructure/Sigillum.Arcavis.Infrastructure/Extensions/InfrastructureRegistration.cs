@@ -20,8 +20,8 @@ public static class InfrastructureRegistration
 
         #region Dispatchers
         services
-            .AddScoped<ICommandDispatcher, CommandDispatcher>()
-            .AddScoped<IQueryDispatcher, QueryDispatcher>();
+            .AddScoped<IAppCommandDispatcher, CommandDispatcher>()
+            .AddScoped<IAppQueryDispatcher, QueryDispatcher>();
         #endregion
 
         return services; 

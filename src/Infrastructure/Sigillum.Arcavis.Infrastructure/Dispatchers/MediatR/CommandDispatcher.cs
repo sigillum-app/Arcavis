@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using Mediator;
 using Sigillum.Arcavis.Core.Application.Abstraction.Dispatcher;
-using Sigillum.Arcavis.Core.Application.CQRS;
+using Sigillum.Arcavis.Core.Application.Common.CQRS;
 
 namespace Sigillum.Arcavis.Infrastructure.Dispatchers.MediatR;
 
-internal sealed class CommandDispatcher : ICommandDispatcher
+internal sealed class CommandDispatcher : IAppCommandDispatcher
 {
     private readonly IMediator _mediator;
 
@@ -13,14 +13,12 @@ internal sealed class CommandDispatcher : ICommandDispatcher
         _mediator = mediator;
     }
 
-    public Task SendAsync(ICommand command, CancellationToken cancellationToken = default)
+    public async ValueTask SendAsync(IAppCommand command, CancellationToken cancellationToken = default)
     {
-        return _mediator.Send(command, cancellationToken);
+        await _mediator.Send(command, cancellationToken);
     }
 
-    public Task<TResult> SendAsync<TResult>(
-        ICommand<TResult> command,
-        CancellationToken cancellationToken = default)
+    public ValueTask<TResult> SendAsync<TResult>(IAppCommand<TResult> command, CancellationToken cancellationToken = default)
     {
         return _mediator.Send(command, cancellationToken);
     }

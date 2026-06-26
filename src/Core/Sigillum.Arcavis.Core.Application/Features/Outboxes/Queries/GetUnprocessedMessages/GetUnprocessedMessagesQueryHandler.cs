@@ -1,9 +1,9 @@
-﻿using MediatR;
-using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+﻿using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+using Sigillum.Arcavis.Core.Application.Common.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Queries.GetUnprocessedMessages;
 
-internal sealed class GetUnprocessedMessagesQueryHandler : IRequestHandler<GetUnprocessedMessagesQuery, IReadOnlyList<GetUnprocessedMessagesDto>>
+internal sealed class GetUnprocessedMessagesQueryHandler : IAppQueryHandler<GetUnprocessedMessagesQuery, IReadOnlyList<GetUnprocessedMessagesDto>>
 {
     private readonly IOutboxQueryService _queryService;
 
@@ -12,7 +12,7 @@ internal sealed class GetUnprocessedMessagesQueryHandler : IRequestHandler<GetUn
         _queryService = queryService;
     }
 
-    public async Task<IReadOnlyList<GetUnprocessedMessagesDto>> Handle(GetUnprocessedMessagesQuery request, CancellationToken cancellationToken)
+    public async ValueTask<IReadOnlyList<GetUnprocessedMessagesDto>> Handle(GetUnprocessedMessagesQuery request, CancellationToken cancellationToken)
     {
         var roms = await _queryService.GetUnprocessedMessagesAsync(request.BatchSize, cancellationToken);
 

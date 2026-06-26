@@ -2,12 +2,13 @@
 using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
 using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
-using Sigillum.Arcavis.Core.Application.CQRS;
+using Sigillum.Arcavis.Core.Application.Common.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.ProcessMessages;
 
-internal sealed class ProcessMessagesCommandHandler : ICommandHandler<ProcessMessagesCommand>
+internal sealed class ProcessMessagesCommandHandler : IAppCommandHandler<ProcessMessagesCommand>
 {
+    #region Dependencies
     private readonly IOutboxQueryService _outboxQueryService;
     private readonly IOutboxService _outboxService;
     private readonly IUnitOfWork _unitOfWork;
@@ -24,8 +25,9 @@ internal sealed class ProcessMessagesCommandHandler : ICommandHandler<ProcessMes
         _unitOfWork = unitOfWork;
         _eventPublisher = eventPublisher;
     }
+    #endregion
 
-    public async Task Handle(ProcessMessagesCommand request, CancellationToken cancellationToken)
+    public async ValueTask<Unit> Handle(ProcessMessagesCommand request, CancellationToken cancellationToken)
     {
         var messages = await _outboxQueryService.GetUnprocessedMessagesAsync(20, cancellationToken);
 
@@ -45,5 +47,7 @@ internal sealed class ProcessMessagesCommandHandler : ICommandHandler<ProcessMes
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
         }
+
+        return Unit.Value;
     }
 }

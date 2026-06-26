@@ -1,10 +1,10 @@
 ﻿using Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
-using Sigillum.Arcavis.Core.Application.CQRS;
+using Sigillum.Arcavis.Core.Application.Common.CQRS;
 using Sigillum.Arcavis.Core.Domain.Users;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 
-public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, RegisterUserDto>
+public sealed class RegisterUserCommandHandler : IAppCommandHandler<RegisterUserCommand, RegisterUserDto>
 {
     #region Dependencies
     private readonly IUserRepository _userRepository;
@@ -19,12 +19,12 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
     }
     #endregion
 
-    public async Task<RegisterUserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async ValueTask<RegisterUserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var user = User.Register(
-                        request.Email,
-                        _passwordHasher.HashPassword(request.Password)
-                   );
+                request.Email,
+                _passwordHasher.HashPassword(request.Password)
+           );
 
         await _userRepository.AddAsync(user);
 

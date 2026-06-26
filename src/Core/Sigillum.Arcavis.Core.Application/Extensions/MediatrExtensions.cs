@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Mediator;
+using Microsoft.Extensions.DependencyInjection;
 using Sigillum.Arcavis.Core.Application.Common.Behaviors;
-using System.Reflection;
 
 namespace Sigillum.Arcavis.Core.Application.Extensions;
 
@@ -8,14 +8,13 @@ public static class MediatrExtensions
 {
     public static IServiceCollection AddMediatrRegistration(this IServiceCollection services)
     {
-        services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddMediator((MediatorOptions options) =>
+        {
+            options.ServiceLifetime = ServiceLifetime.Scoped;
+        });
 
-                cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
-                cfg.AddOpenBehavior(typeof(DomainEventToOutboxBehavior<,>));
-            }
-        );
+        services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>))
+                .AddSingleton(typeof(IPipelineBehavior<,>), typeof(DomainEventToOutboxBehavior<,>));
 
         return services;
     }
