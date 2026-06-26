@@ -1,4 +1,4 @@
-﻿using Sigillum.Arcavis.Core.Domain.SeedWork;
+﻿using Sigillum.Arcavis.Core.Domain.Common;
 
 namespace Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 

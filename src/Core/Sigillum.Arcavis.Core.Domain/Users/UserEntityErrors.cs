@@ -1,4 +1,4 @@
-﻿using Sigillum.Arcavis.Core.Domain.SeedWork.ExceptionHandling;
+﻿using Sigillum.Arcavis.Core.Domain.Common.ExceptionHandling;
 
 namespace Sigillum.Arcavis.Core.Domain.Users;
 

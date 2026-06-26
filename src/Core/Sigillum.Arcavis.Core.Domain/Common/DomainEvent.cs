@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Domain.SeedWork;
+﻿namespace Sigillum.Arcavis.Core.Domain.Common;
 
 public abstract record DomainEvent
 {

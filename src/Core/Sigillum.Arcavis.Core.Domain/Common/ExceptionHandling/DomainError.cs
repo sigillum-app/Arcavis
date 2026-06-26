@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Domain.SeedWork.ExceptionHandling;
+﻿namespace Sigillum.Arcavis.Core.Domain.Common.ExceptionHandling;
 
 public sealed class DomainError
 {

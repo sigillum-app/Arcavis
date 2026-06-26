@@ -1,5 +1,5 @@
 ﻿using Sigillum.Arcavis.Core.Domain.Base;
-using Sigillum.Arcavis.Core.Domain.SeedWork;
+using Sigillum.Arcavis.Core.Domain.Common;
 using Sigillum.Arcavis.Core.Domain.Users.Emails;
 using Sigillum.Arcavis.Core.Domain.Users.Events;
 using Sigillum.Arcavis.Core.Domain.Users.Passwords;
