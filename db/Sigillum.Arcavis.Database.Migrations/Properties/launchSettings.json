@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Sigillum.Arcavis.Database.Migrations": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

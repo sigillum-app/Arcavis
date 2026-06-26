@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/db/">
+    <Project Path="db/Sigillum.Arcavis.Database.Migrations/Sigillum.Arcavis.Database.Migrations.csproj" Id="3801b68d-f3db-4e3c-9b21-5ee9750b8ad5" />
+  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/Core/">
     <Project Path="src/Core/Sigillum.Arcavis.Core.Application/Sigillum.Arcavis.Core.Application.csproj" />
