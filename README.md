@@ -37,7 +37,7 @@ Arcavis is built following Clean Architecture principles with strict separation 
 ### Dependency Flow
 
 Presentation → Application → Domain  
-Infrastructure implements Application and Domain abstractions.
+Infrastructure provides implementations for contracts defined by the Application layer and persistence mappings for the Domain model.
 
 The Domain layer has no external dependencies.
 
@@ -61,8 +61,8 @@ Contains the core business logic and invariants.
 Orchestrates use cases and application workflows.
 
 - CQRS command and query handlers
-- MediatR pipeline behaviors
-- Transaction management
+- Mediator.SourceGenerator pipeline behaviors
+- Transaction pipeline behaviors
 - Outbox coordination
 - Security abstractions (e.g. password hashing, user context)
 
@@ -114,7 +114,7 @@ Implements external system integrations.
 - Outbox pattern for reliable event publishing
 - Transactional consistency between database and events
 - Background worker-based event publishing
-- Idempotent event consumption design
+- Designed for idempotent event consumption by downstream services.
 
 ---
 
@@ -122,14 +122,15 @@ Implements external system integrations.
 
 ### Event Flow
 
-1. Client sends command (e.g. RegisterUser)
-2. Application layer executes use case
-3. Domain logic is applied
-4. Domain event is created
-5. Event is stored in Outbox (same transaction)
-6. Background worker processes Outbox
-7. Event is published to RabbitMQ
-8. Downstream services consume event
+1. Client sends a command (e.g. RegisterUser)
+2. The application executes the use case
+3. The aggregate performs the business operation
+4. The aggregate raises one or more domain events
+5. A pipeline behavior collects the domain events
+6. Domain events are mapped to integration events
+7. Integration events are added to the Outbox within the current transaction
+8. The transaction is committed atomically
+9. The background worker publishes integration events to RabbitMQ
 
 ---
 
@@ -179,7 +180,7 @@ Implements external system integrations.
 
 ### Why CQRS?
 
-To separate read and write workloads for scalability and maintainability.
+To keep transactional writes isolated while serving read workloads through optimized projections using RepoDb.
 
 ---
 
@@ -191,8 +192,8 @@ To solve the dual-write problem and ensure reliable event delivery in distribute
 
 ### Why EF Core + RepoDb?
 
-- EF Core ensures transactional integrity for writes
-- RepoDb provides optimized performance for read-heavy queries
+- EF Core is responsible for aggregate persistence and transactional consistency.
+- RepoDb is used exclusively for read-side projections where change tracking is unnecessary.
 
 ---
 
