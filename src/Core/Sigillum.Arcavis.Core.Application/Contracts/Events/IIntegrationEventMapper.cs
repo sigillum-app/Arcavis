@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.Events;
+﻿namespace Sigillum.Arcavis.Core.Application.Contracts.Events;
 
 public interface IIntegrationEventMapper
 {

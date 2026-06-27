@@ -1,5 +1,5 @@
 ﻿using RepoDb;
-using Sigillum.Arcavis.Core.Application.Abstraction.ROM.Users.Base;
+using Sigillum.Arcavis.Core.Application.Contracts.ROM.Users.Base;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Mapping;
 

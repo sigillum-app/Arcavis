@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
+﻿namespace Sigillum.Arcavis.Core.Application.Contracts.EventBus;
 
 public interface IEventPublisher
 {

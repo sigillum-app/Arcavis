@@ -1,5 +1,5 @@
 ﻿using Konscious.Security.Cryptography;
-using Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
+using Sigillum.Arcavis.Core.Application.Contracts.Security.Hasher;
 using System.Security.Cryptography;
 
 namespace Sigillum.Arcavis.Infrastructure.Security.Hashing;

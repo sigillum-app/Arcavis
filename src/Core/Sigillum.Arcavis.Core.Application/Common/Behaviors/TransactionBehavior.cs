@@ -1,6 +1,6 @@
 ﻿using Mediator;
 using Microsoft.Extensions.Logging;
-using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
+using Sigillum.Arcavis.Core.Application.Contracts.Persistence;
 
 namespace Sigillum.Arcavis.Core.Application.Common.Behaviors;
 

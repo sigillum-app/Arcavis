@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Logging;
-using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
-using Sigillum.Arcavis.Core.Application.Abstraction.Events;
+using Sigillum.Arcavis.Core.Application.Contracts.EventBus;
+using Sigillum.Arcavis.Core.Application.Contracts.Events;
 using System.Text.Json;
 
 namespace Sigillum.Arcavis.Infrastructure.EventBus.Publishers;

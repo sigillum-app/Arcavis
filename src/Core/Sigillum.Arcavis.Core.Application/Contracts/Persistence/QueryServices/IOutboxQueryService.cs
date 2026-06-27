@@ -1,6 +1,6 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.ROM.Outbox.Base;
+﻿using Sigillum.Arcavis.Core.Application.Contracts.ROM.Outbox.Base;
 
-namespace Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+namespace Sigillum.Arcavis.Core.Application.Contracts.Persistence.QueryServices;
 
 public interface IOutboxQueryService
 {

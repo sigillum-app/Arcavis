@@ -1,5 +1,5 @@
 ﻿using Mediator;
-using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+using Sigillum.Arcavis.Core.Application.Contracts.Persistence.QueryServices;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Queries.GetAllUsers;
 

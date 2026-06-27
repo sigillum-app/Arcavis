@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
+using Sigillum.Arcavis.Core.Application.Contracts.Outbox;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Outbox;

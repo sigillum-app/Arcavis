@@ -1,4 +1,4 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
+﻿using Sigillum.Arcavis.Core.Application.Contracts.Security.Hasher;
 using System.Text;
 
 namespace Sigillum.Arcavis.Infrastructure.Security.Hashing;

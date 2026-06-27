@@ -1,8 +1,8 @@
 ﻿using Mediator;
-using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
-using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
-using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
-using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+using Sigillum.Arcavis.Core.Application.Contracts.EventBus;
+using Sigillum.Arcavis.Core.Application.Contracts.Outbox;
+using Sigillum.Arcavis.Core.Application.Contracts.Persistence;
+using Sigillum.Arcavis.Core.Application.Contracts.Persistence.QueryServices;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.ProcessMessages;
 

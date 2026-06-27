@@ -1,5 +1,5 @@
 ﻿using Mediator;
-using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
+using Sigillum.Arcavis.Core.Application.Contracts.Outbox;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.MarkAsFailedAsync;
 

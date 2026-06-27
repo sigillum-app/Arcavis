@@ -1,8 +1,8 @@
 ﻿using Mediator;
 using Microsoft.Extensions.Logging;
-using Sigillum.Arcavis.Core.Application.Abstraction.Events;
-using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
-using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
+using Sigillum.Arcavis.Core.Application.Contracts.Events;
+using Sigillum.Arcavis.Core.Application.Contracts.Outbox;
+using Sigillum.Arcavis.Core.Application.Contracts.Persistence;
 using System.Text.Json;
 
 namespace Sigillum.Arcavis.Core.Application.Common.Behaviors;

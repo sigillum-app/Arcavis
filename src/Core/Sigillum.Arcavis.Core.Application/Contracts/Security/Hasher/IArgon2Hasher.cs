@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
+﻿namespace Sigillum.Arcavis.Core.Application.Contracts.Security.Hasher;
 
 public interface IArgon2Hasher
 {

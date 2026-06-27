@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.ROM.Outbox.Base;
+﻿namespace Sigillum.Arcavis.Core.Application.Contracts.ROM.Outbox.Base;
 
 public class OutboxRom
 {

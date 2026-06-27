@@ -1,6 +1,6 @@
 ﻿using Sigillum.Arcavis.Core.Domain.Common;
 
-namespace Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
+namespace Sigillum.Arcavis.Core.Application.Contracts.Persistence;
 
 public interface IUnitOfWork
 {

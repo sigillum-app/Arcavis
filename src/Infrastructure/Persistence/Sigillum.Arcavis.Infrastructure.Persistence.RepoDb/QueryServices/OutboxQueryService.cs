@@ -1,8 +1,7 @@
 ﻿using RepoDb;
-using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
-using Sigillum.Arcavis.Core.Application.Abstraction.ROM.Outbox.Base;
+using Sigillum.Arcavis.Core.Application.Contracts.Persistence.QueryServices;
+using Sigillum.Arcavis.Core.Application.Contracts.ROM.Outbox.Base;
 using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Connection;
-using System.Data.Common;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.QueryServices;
 

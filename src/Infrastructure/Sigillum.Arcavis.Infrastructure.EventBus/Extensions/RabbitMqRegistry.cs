@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
+using Sigillum.Arcavis.Core.Application.Contracts.EventBus;
 using Sigillum.Arcavis.Infrastructure.EventBus.Publishers;
 
 namespace Sigillum.Arcavis.Infrastructure.EventBus.Extensions;

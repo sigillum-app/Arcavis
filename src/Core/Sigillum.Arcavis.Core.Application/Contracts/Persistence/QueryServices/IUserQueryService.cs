@@ -1,7 +1,7 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.ROM.Users.Base;
-using Sigillum.Arcavis.Core.Application.Common.Pagination;
+﻿using Sigillum.Arcavis.Core.Application.Common.Pagination;
+using Sigillum.Arcavis.Core.Application.Contracts.ROM.Users.Base;
 
-namespace Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
+namespace Sigillum.Arcavis.Core.Application.Contracts.Persistence.QueryServices;
 
 public interface IUserQueryService
 {

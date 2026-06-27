@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
+﻿namespace Sigillum.Arcavis.Core.Application.Contracts.Outbox;
 
 public interface IOutboxService
 {
