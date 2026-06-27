@@ -8,11 +8,11 @@ using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Outbox;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Repositories;
 
-namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Extensions;
+namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore;
 
-public static class EfCoreExtensions
+public static class EfCoreRegistration
 {
-    public static IServiceCollection AddEfCoreRegistration(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddEfCore(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ArcavisContext>(options =>
         {

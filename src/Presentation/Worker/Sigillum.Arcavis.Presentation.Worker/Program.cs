@@ -1,5 +1,5 @@
-using Sigillum.Arcavis.Core.Application.Extensions;
-using Sigillum.Arcavis.Infrastructure.Extensions;
+using Sigillum.Arcavis.Core.Application;
+using Sigillum.Arcavis.Infrastructure;
 using Sigillum.Arcavis.Presentation.Worker;
 
 var builder = Host.CreateApplicationBuilder(args);

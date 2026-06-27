@@ -6,11 +6,11 @@ using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Connection;
 using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Mapping;
 using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.QueryServices;
 
-namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Extensions;
+namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb;
 
-public static class RepoDbExtensions
+public static class RepoDbRegistration
 {
-    public static IServiceCollection AddRepoDbRegistration(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddRepoDb(this IServiceCollection services, IConfiguration configuration)
     {
         GlobalConfiguration
             .Setup()

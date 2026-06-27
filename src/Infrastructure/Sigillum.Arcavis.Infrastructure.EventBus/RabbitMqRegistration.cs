@@ -4,11 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Sigillum.Arcavis.Core.Application.Contracts.EventBus;
 using Sigillum.Arcavis.Infrastructure.EventBus.Publishers;
 
-namespace Sigillum.Arcavis.Infrastructure.EventBus.Extensions;
+namespace Sigillum.Arcavis.Infrastructure.EventBus;
 
-public static class RabbitMqRegistry
+public static class RabbitMqRegistration
 {
-    public static IServiceCollection AddRabbitMqRegistration(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddRabbitMQ(this IServiceCollection services, IConfiguration configuration)
     {
         var host = configuration["RabbitMQ:Host"]!;
         var username = configuration["RabbitMQ:Username"]!;
@@ -31,7 +31,5 @@ public static class RabbitMqRegistry
         services.AddScoped<IEventPublisher, EventPublisher>();
 
         return services;
-
     }
-
 }
