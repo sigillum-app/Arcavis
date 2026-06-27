@@ -1,5 +1,6 @@
-﻿using Sigillum.Arcavis.Core.Application.Common.CQRS;
+﻿
+using Mediator;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.MarkAsProcessed;
 
-public record MarkAsProcessedCommand(Guid Id) : IAppCommand;
+public record MarkAsProcessedCommand(Guid Id) : ICommand;

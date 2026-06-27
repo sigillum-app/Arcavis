@@ -1,10 +1,10 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
-using Sigillum.Arcavis.Core.Application.Common.CQRS;
+﻿using Mediator;
+using Sigillum.Arcavis.Core.Application.Abstraction.Security.Hasher;
 using Sigillum.Arcavis.Core.Domain.Users;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 
-public sealed class RegisterUserCommandHandler : IAppCommandHandler<RegisterUserCommand, RegisterUserDto>
+public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, RegisterUserDto>
 {
     #region Dependencies
     private readonly IUserRepository _userRepository;

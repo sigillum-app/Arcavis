@@ -1,9 +1,9 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
-using Sigillum.Arcavis.Core.Application.Common.CQRS;
+﻿using Mediator;
+using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.MarkAsFailedAsync;
 
-internal sealed class MarkAsFailedCommandHandler : IAppCommandHandler<MarkAsFailedCommand>
+internal sealed class MarkAsFailedCommandHandler : ICommandHandler<MarkAsFailedCommand>
 {
     private readonly IOutboxService _outboxService;
 

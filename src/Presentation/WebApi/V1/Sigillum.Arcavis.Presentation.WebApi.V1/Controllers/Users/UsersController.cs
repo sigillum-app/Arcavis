@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Sigillum.Arcavis.Core.Application.Abstraction.Dispatcher;
+﻿using Mediator;
+using Microsoft.AspNetCore.Mvc;
 using Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 using Sigillum.Arcavis.Core.Application.Features.Users.Queries.GetAllUsers;
 
@@ -9,28 +9,24 @@ namespace Sigillum.Arcavis.Presentation.WebApi.V1.Controllers.Users;
 [ApiController]
 public class UsersController : ControllerBase
 {
-    private readonly IAppCommandDispatcher _commandDispatcher;
-    private readonly IAppQueryDispatcher _queryDispatcher;
+    private readonly IMediator _mediator;
 
-    public UsersController(
-        IAppCommandDispatcher commandDispatcher, 
-        IAppQueryDispatcher queryDispatcher)
+    public UsersController(IMediator mediator)
     {
-        _commandDispatcher = commandDispatcher;
-        _queryDispatcher = queryDispatcher;
+        _mediator = mediator;
     }
 
     [HttpPost]
     public async Task<IActionResult> Register(RegisterUserCommand command)
     {
-        var id = await _commandDispatcher.SendAsync(command);
+        var id = await _mediator.Send(command);
         return Ok(id);
     }
 
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] GetAllUsersQuery query)
     {
-        var users = await _queryDispatcher.SendAsync(query);
+        var users = await _mediator.Send(query);
         return Ok(users);
     }
 }

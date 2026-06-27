@@ -1,7 +1,7 @@
 ﻿using Sigillum.Arcavis.Core.Application.Abstraction.Events;
 using Sigillum.Arcavis.Core.Domain.Users.Events;
 
-namespace Sigillum.Arcavis.Core.Application.IntegrationEvents;
+namespace Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 
 public class UserRegisteredIntegrationEventMapper: IIntegrationEventMapper<UserRegisteredEvent>
 {

@@ -1,4 +1,4 @@
-using Sigillum.Arcavis.Core.Application.Abstraction.Dispatcher;
+using MassTransit.Mediator;
 using Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.ProcessMessages;
 
 namespace Sigillum.Arcavis.Presentation.Worker;
@@ -22,8 +22,8 @@ public class OutboxWorker : BackgroundService
             try
             {
                 using var scope = _scopeFactory.CreateScope();
-                var dispatcher = scope.ServiceProvider.GetRequiredService<IAppCommandDispatcher>();
-                await dispatcher.SendAsync(new ProcessMessagesCommand(), stoppingToken);
+                var dispatcher = scope.ServiceProvider.GetRequiredService<IMediator>();
+                await dispatcher.Send(new ProcessMessagesCommand(), stoppingToken);
             }
             catch (Exception ex)
             {

@@ -4,7 +4,7 @@ using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 
 namespace Sigillum.Arcavis.Core.Application.Common.Behaviors;
 
-public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, IMessage
+public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull, IBaseCommand
 {
     #region Dependencies
     private readonly IUnitOfWork _unitOfWork;

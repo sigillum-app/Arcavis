@@ -1,9 +1,9 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
-using Sigillum.Arcavis.Core.Application.Common.CQRS;
+﻿using Mediator;
+using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Queries.GetUnprocessedMessages;
 
-internal sealed class GetUnprocessedMessagesQueryHandler : IAppQueryHandler<GetUnprocessedMessagesQuery, IReadOnlyList<GetUnprocessedMessagesDto>>
+internal sealed class GetUnprocessedMessagesQueryHandler : IQueryHandler<GetUnprocessedMessagesQuery, IReadOnlyList<GetUnprocessedMessagesDto>>
 {
     private readonly IOutboxQueryService _queryService;
 

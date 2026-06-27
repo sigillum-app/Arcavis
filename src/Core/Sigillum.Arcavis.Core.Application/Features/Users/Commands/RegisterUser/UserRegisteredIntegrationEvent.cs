@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Core.Application.IntegrationEvents;
+﻿namespace Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 
 public record UserRegisteredIntegrationEvent
 (

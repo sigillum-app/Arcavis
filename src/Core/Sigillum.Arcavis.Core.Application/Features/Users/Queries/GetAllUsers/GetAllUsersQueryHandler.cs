@@ -1,9 +1,9 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
-using Sigillum.Arcavis.Core.Application.Common.CQRS;
+﻿using Mediator;
+using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Queries.GetAllUsers;
 
-internal sealed class GetAllUsersQueryHandler : IAppQueryHandler<GetAllUsersQuery, IReadOnlyList<GetAllUsersDto>>
+internal sealed class GetAllUsersQueryHandler : IQueryHandler<GetAllUsersQuery, IReadOnlyList<GetAllUsersDto>>
 {
     private readonly IUserQueryService _userQueryService;
 
@@ -16,9 +16,10 @@ internal sealed class GetAllUsersQueryHandler : IAppQueryHandler<GetAllUsersQuer
     {
         var users = await _userQueryService.GetAllAsync(cancellationToken);
 
-        return users.Select(u => new GetAllUsersDto(
-            Id: u.Id,
-            IsActive: u.IsActive
-        )).ToList();
+        return users
+            .Select(u => new GetAllUsersDto(
+                u.Id,
+                u.IsActive))
+            .ToArray();
     }
 }

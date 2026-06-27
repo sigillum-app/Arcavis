@@ -1,6 +1,6 @@
-﻿using Sigillum.Arcavis.Core.Application.Common;
-using Sigillum.Arcavis.Core.Application.Common.CQRS;
+﻿using Mediator;
+using Sigillum.Arcavis.Core.Application.Common;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.ProcessMessages;
 
-public record ProcessMessagesCommand : IAppCommand, IManualTransactionRequest;
+public record ProcessMessagesCommand : ICommand, IManualTransactionRequest;

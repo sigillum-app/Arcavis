@@ -1,12 +1,12 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
+﻿using Mediator;
+using Sigillum.Arcavis.Core.Application.Abstraction.EventBus;
 using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
 using Sigillum.Arcavis.Core.Application.Abstraction.Persistence;
 using Sigillum.Arcavis.Core.Application.Abstraction.Persistence.QueryServices;
-using Sigillum.Arcavis.Core.Application.Common.CQRS;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.ProcessMessages;
 
-internal sealed class ProcessMessagesCommandHandler : IAppCommandHandler<ProcessMessagesCommand>
+internal sealed class ProcessMessagesCommandHandler : ICommandHandler<ProcessMessagesCommand>
 {
     #region Dependencies
     private readonly IOutboxQueryService _outboxQueryService;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sigillum.Arcavis.Core.Application.Abstraction.Events;
-using Sigillum.Arcavis.Core.Application.IntegrationEvents;
+using Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 
 namespace Sigillum.Arcavis.Core.Application.Extensions;
 

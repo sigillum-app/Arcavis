@@ -1,9 +1,9 @@
-﻿using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
-using Sigillum.Arcavis.Core.Application.Common.CQRS;
+﻿using Mediator;
+using Sigillum.Arcavis.Core.Application.Abstraction.Outbox;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.MarkAsProcessed;
 
-internal sealed class MarkAsProcessedCommandHandler : IAppCommandHandler<MarkAsProcessedCommand>
+internal sealed class MarkAsProcessedCommandHandler : ICommandHandler<MarkAsProcessedCommand>
 {
     private readonly IOutboxService _outboxService;
 
