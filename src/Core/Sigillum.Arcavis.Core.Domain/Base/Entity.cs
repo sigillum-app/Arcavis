@@ -15,5 +15,4 @@ public abstract class Entity
 
     public void ClearDomainEvents()
         => _domainEvents.Clear();
-
 }

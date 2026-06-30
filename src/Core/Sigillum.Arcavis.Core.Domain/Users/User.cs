@@ -25,33 +25,44 @@ public sealed class User : Entity, IAggregateRoot
         IsActive = false;
     }
 
-    public static User Register(string emailAddress, string passwordHash)
+    public static Result<User> Register(string emailAddress, string passwordHash)
     {
+        var emailResult = Email.Create(emailAddress);
+        var passwordResult = Password.Create(passwordHash);
+
+        if (emailResult.IsFailure || passwordResult.IsFailure)
+        {
+            var errors = emailResult.Errors
+                .Concat(passwordResult.Errors)
+                .ToList();
+
+            return Result<User>.Failure(errors);
+        }
+
         var user = new User(new UserId(Guid.NewGuid()));
+        user._emails.Add(emailResult.Value);
+        user._passwords.Add(passwordResult.Value);
 
-        var emailEntity = new Email(emailAddress);
-        var passwordEntity = new Password(passwordHash);
+        user.AddDomainEvent(new UserRegisteredEvent(user.Id.Value, emailResult.Value.EmailAddress));
 
-        user._emails.Add(emailEntity);
-        user._passwords.Add(passwordEntity);
-        user.AddDomainEvent(new UserRegisteredEvent(user.Id.Value, emailEntity.EmailAddress));
-
-        return user;
+        return Result<User>.Success(user);
     }
 
-    public void Deactivate()
+    public Result Deactivate()
     {
         if (!IsActive)
-            return;
+            return Result.Failure(UserError.UserAlreadyInactive);
 
         IsActive = false;
+        return Result.Success();
     }
 
-    public void Activate()
+    public Result Activate()
     {
         if (IsActive)
-            return;
+            return Result.Failure(UserError.UserAlreadyActive);
 
         IsActive = true;
+        return Result.Success();
     }
 }

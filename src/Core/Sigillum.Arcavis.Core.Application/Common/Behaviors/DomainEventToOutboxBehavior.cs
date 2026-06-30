@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Sigillum.Arcavis.Core.Application.Contracts.Events;
 using Sigillum.Arcavis.Core.Application.Contracts.Outbox;
 using Sigillum.Arcavis.Core.Application.Contracts.Persistence;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace Sigillum.Arcavis.Core.Application.Common.Behaviors;
@@ -41,7 +42,14 @@ public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavio
             if (!_mapperDict.TryGetValue(domainEvent.GetType(), out var mapper))
                 continue;
 
-            var integrationEvent = mapper.Map(domainEvent);
+            if (mapper.Map(domainEvent) is not IntegrationEvent integrationEvent)
+                continue;
+
+            integrationEvent = integrationEvent with
+            {
+                SourceEventId = domainEvent.EventId,
+                OccurredAt = domainEvent.OccurredAt,
+            };
 
             await _outbox.AddAsync(
                 mapper.EventName,

@@ -1,26 +1,26 @@
-﻿namespace Sigillum.Arcavis.Core.Domain.Common.ExceptionHandling;
+﻿namespace Sigillum.Arcavis.Core.Domain.Common;
 
-public sealed class DomainError
+public sealed class DomainError : IError
 {
     public int Code { get; }
-    public string Message { get; }
+    public string Key { get; }
     public string Source { get; }
     public string Layer { get; }
     public string? Detail { get; }
 
     internal DomainError(
         int code,
-        string message,
+        string key,
         string source,
         string? detail = null)
     {
         Code = code;
-        Message = message;
+        Key = key;
         Source = source;
         Layer = "1";
         Detail = detail;
     }
 
     public DomainError WithDetail(string detail)
-        => new(Code, Message, Source, detail);
+        => new(Code, Key, Source, detail);
 }

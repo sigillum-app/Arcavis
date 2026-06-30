@@ -1,5 +1,5 @@
 ﻿using Sigillum.Arcavis.Core.Domain.Base;
-using Sigillum.Arcavis.Core.Domain.Common.ExceptionHandling;
+using Sigillum.Arcavis.Core.Domain.Common;
 
 namespace Sigillum.Arcavis.Core.Domain.Users.Emails;
 
@@ -11,27 +11,53 @@ public sealed class Email : Entity
 
     protected Email() { }
 
-    public Email(string emailAddress)
+    private Email(string emailAddress)
     {
-        if (string.IsNullOrWhiteSpace(emailAddress))
-            throw new DomainException(EmailErrors.InvalidEmail);
-
         Id = new EmailId(Guid.NewGuid());
-        EmailAddress = emailAddress.Trim().ToLowerInvariant();
+        EmailAddress = emailAddress;
         IsVerified = false;
     }
 
-    public void Verify()
+    public static Result<Email> Create(string emailAddress)
     {
-        IsVerified = true;
+        var validationResult = Validate(emailAddress);
+        if (validationResult.IsFailure)
+            return Result<Email>.Failure(validationResult.Errors);
+
+        return Result<Email>.Success(new Email(emailAddress.Trim().ToLowerInvariant()));
     }
 
-    public void ChangeEmail(string newEmailAddress)
+    public Result Verify()
     {
-        if (string.IsNullOrWhiteSpace(newEmailAddress))
-            throw new DomainException(EmailErrors.InvalidEmail);
+        if (IsVerified)
+            return Result.Failure(EmailError.AlreadyVerified);
+
+        IsVerified = true;
+
+        return Result.Success();
+    }
+
+    public Result ChangeEmail(string newEmailAddress)
+    {
+        var validationResult = Validate(newEmailAddress);
+        if (validationResult.IsFailure)
+            return Result.Failure(validationResult.Errors);
 
         EmailAddress = newEmailAddress.Trim().ToLowerInvariant();
         IsVerified = false;
+
+        return Result.Success();
+    }
+
+    private static Result Validate(string emailAddress)
+    {
+        if (string.IsNullOrWhiteSpace(emailAddress))
+            return Result.Failure(EmailError.InvalidEmail);
+
+        if (!emailAddress.Contains('@'))
+            return Result.Failure(EmailError.InvalidEmail);
+
+        return Result.Success();
     }
 }
+

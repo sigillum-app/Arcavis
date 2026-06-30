@@ -1,10 +1,11 @@
 ﻿using Mediator;
 using Sigillum.Arcavis.Core.Application.Contracts.Security.Hasher;
+using Sigillum.Arcavis.Core.Domain.Common;
 using Sigillum.Arcavis.Core.Domain.Users;
 
 namespace Sigillum.Arcavis.Core.Application.Features.Users.Commands.RegisterUser;
 
-public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, RegisterUserDto>
+public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, Result<RegisterUserDto>>
 {
     #region Dependencies
     private readonly IUserRepository _userRepository;
@@ -19,15 +20,18 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
     }
     #endregion
 
-    public async ValueTask<RegisterUserDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async ValueTask<Result<RegisterUserDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var user = User.Register(
+        var result = User.Register(
                 request.Email,
                 _passwordHasher.HashPassword(request.Password)
            );
 
-        await _userRepository.AddAsync(user);
+        if (result.IsFailure)
+            return Result<RegisterUserDto>.Failure(result.Errors);
 
-        return new RegisterUserDto(user.Id.Value);
+        await _userRepository.AddAsync(result.Value);
+
+        return Result<RegisterUserDto>.Success(new RegisterUserDto(result.Value.Id.Value));
     }
 }
