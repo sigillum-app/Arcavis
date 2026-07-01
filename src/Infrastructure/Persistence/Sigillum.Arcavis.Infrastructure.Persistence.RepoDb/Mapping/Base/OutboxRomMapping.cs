@@ -1,7 +1,7 @@
 ﻿using RepoDb;
 using Sigillum.Arcavis.Core.Application.Contracts.ROM.Outbox.Base;
 
-namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Mapping;
+namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Mapping.Base;
 
 internal static class OutboxRomMap
 {

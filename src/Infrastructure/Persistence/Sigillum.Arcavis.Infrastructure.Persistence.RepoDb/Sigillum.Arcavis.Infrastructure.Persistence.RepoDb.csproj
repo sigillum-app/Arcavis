@@ -16,4 +16,8 @@
     <ProjectReference Include="..\..\..\Core\Sigillum.Arcavis.Core.Application\Sigillum.Arcavis.Core.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapping\Custom\" />
+  </ItemGroup>
+
 </Project>

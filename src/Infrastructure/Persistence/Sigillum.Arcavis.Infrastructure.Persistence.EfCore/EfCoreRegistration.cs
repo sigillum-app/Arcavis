@@ -5,6 +5,7 @@ using Sigillum.Arcavis.Core.Application.Contracts.Outbox;
 using Sigillum.Arcavis.Core.Application.Contracts.Persistence;
 using Sigillum.Arcavis.Core.Domain.Users;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Context;
+using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Interceptors;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Outbox;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Repositories;
 
@@ -14,9 +15,11 @@ public static class EfCoreRegistration
 {
     public static IServiceCollection AddEfCore(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ArcavisContext>(options =>
+        services.AddDbContext<ArcavisContext>((sp, options) =>
         {
             options.UseNpgsql(configuration.GetConnectionString("PostgreSqlConnection"));
+
+            options.AddInterceptors(sp.GetRequiredService<AuditInterceptor>());
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -65,4 +65,28 @@ public sealed class User : Entity, IAggregateRoot
         IsActive = true;
         return Result.Success();
     }
+
+    public Result ChangeEmail(string email)
+    {
+        var result = Email.Create(email);
+
+        if (result.IsFailure)
+            return Result.Failure(result.Errors);
+
+        _emails.Add(result.Value);
+
+        return Result.Success();
+    }
+
+    public Result ChangePassword(string hash)
+    {
+        var result = Password.Create(hash);
+
+        if (result.IsFailure)
+            return Result.Failure(result.Errors);
+        
+        _passwords.Add(result.Value);
+
+        return Result.Success();
+    }
 }

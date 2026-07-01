@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RepoDb;
 using Sigillum.Arcavis.Core.Application.Contracts.Persistence.QueryServices;
 using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Connection;
-using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Mapping;
+using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.Mapping.Base;
 using Sigillum.Arcavis.Infrastructure.Persistence.RepoDb.QueryServices;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.RepoDb;

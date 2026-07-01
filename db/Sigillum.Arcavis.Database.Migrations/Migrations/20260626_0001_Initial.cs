@@ -4,7 +4,7 @@ using System.Data;
 namespace Sigillum.Arcavis.Database.Migrations.Migrations;
 
 [Migration(0001, "Initial_20260626")]
-public class Initial : Migration
+public sealed class Initial : Migration
 {
     public override void Up()
     {
@@ -37,49 +37,41 @@ public class Initial : Migration
     private void CreateUsers()
     {
         Create.Table("USER")
-            .WithColumn("ID").AsGuid().PrimaryKey("PK_USER")
-            .WithColumn("CREATED_BY").AsGuid().Nullable()
-            .WithColumn("CREATED_AT").AsCustom("timestamptz").NotNullable()
-            .WithColumn("UPDATED_BY").AsGuid().Nullable()
-            .WithColumn("UPDATED_AT").AsCustom("timestamptz").NotNullable()
-            .WithColumn("IS_DELETED").AsBoolean().NotNullable().WithDefaultValue(false)
+            .WithBaseColumns("PK_USER")
             .WithColumn("IS_ACTIVE").AsBoolean().NotNullable();
     }
 
     private void CreateUserEmails()
     {
         Create.Table("USER_EMAIL")
-            .WithColumn("ID").AsGuid().PrimaryKey("PK_USER_EMAIL")
+            .WithBaseColumns("PK_USER_EMAIL")
             .WithColumn("EMAIL").AsCustom("text").NotNullable()
             .WithColumn("IS_VERIFIED").AsBoolean().NotNullable()
+            .WithColumn("START_AT").AsDateTime().NotNullable()
             .WithColumn("USER_ID").AsGuid().NotNullable();
     }
 
     private void CreateUserPasswords()
     {
         Create.Table("USER_PASSWORD")
-            .WithColumn("ID").AsGuid().PrimaryKey("PK_USER_PASSWORD")
+            .WithBaseColumns("PK_USER_PASSWORD")
             .WithColumn("PASSWORD_HASH").AsCustom("text").NotNullable()
+            .WithColumn("START_AT").AsDateTime().NotNullable()
             .WithColumn("USER_ID").AsGuid().NotNullable();
     }
 
     private void CreateOutboxMessages()
     {
         Create.Table("OUTBOX_MESSAGE")
-            .WithColumn("ID").AsGuid().PrimaryKey("PK_OUTBOX_MESSAGE")
-            .WithColumn("CREATED_BY").AsGuid().Nullable()
-            .WithColumn("CREATED_AT").AsCustom("timestamptz").NotNullable()
-            .WithColumn("UPDATED_BY").AsGuid().Nullable()
-            .WithColumn("UPDATED_AT").AsCustom("timestamptz").NotNullable()
-            .WithColumn("IS_DELETED").AsBoolean().NotNullable().WithDefaultValue(false)
+            .WithBaseColumns("PK_OUTBOX_MESSAGE")
             .WithColumn("TYPE").AsCustom("text").NotNullable()
             .WithColumn("PAYLOAD").AsCustom("text").NotNullable()
-            .WithColumn("OCCURRED_AT").AsCustom("timestamptz").NotNullable()
-            .WithColumn("PROCESSED_AT").AsCustom("timestamptz").Nullable()
+            .WithColumn("OCCURRED_AT").AsDateTime().NotNullable()
+            .WithColumn("PROCESSED_AT").AsDateTime().Nullable()
             .WithColumn("ERROR").AsCustom("text").Nullable()
             .WithColumn("RETRY_COUNT").AsInt32().NotNullable().WithDefaultValue(0)
             .WithColumn("MAX_RETRY_COUNT").AsInt32().NotNullable().WithDefaultValue(0)
-            .WithColumn("NEXT_RETRY_AT").AsCustom("timestamptz").Nullable();
+            .WithColumn("NEXT_RETRY_AT").AsDateTime().Nullable();
     }
 
     private void CreateIndexes()
@@ -93,13 +85,11 @@ public class Initial : Migration
 
         Create.Index("IX_USER_EMAIL_USER_ID")
             .OnTable("USER_EMAIL")
-            .OnColumn("USER_ID")
-            .Ascending();
+            .OnColumn("USER_ID");
 
         Create.Index("IX_USER_PASSWORD_USER_ID")
             .OnTable("USER_PASSWORD")
-            .OnColumn("USER_ID")
-            .Ascending();
+            .OnColumn("USER_ID");
 
         Create.Index("IX_OUTBOX_MESSAGE_PROCESSED_AT")
             .OnTable("OUTBOX_MESSAGE")

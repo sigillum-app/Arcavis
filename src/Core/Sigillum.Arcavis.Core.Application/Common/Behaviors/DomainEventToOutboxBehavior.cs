@@ -64,5 +64,4 @@ public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavio
 
         return response;
     }
-
 }

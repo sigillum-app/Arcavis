@@ -3,11 +3,12 @@ using Sigillum.Arcavis.Core.Domain.Common;
 
 namespace Sigillum.Arcavis.Core.Domain.Users.Emails;
 
-public sealed class Email : Entity
+public sealed class Email
 {
     public EmailId Id { get; private set; }
     public string EmailAddress { get; private set; }
     public bool IsVerified { get; private set; }
+    public DateTime StartAt { get; private set; }
 
     protected Email() { }
 
@@ -16,18 +17,20 @@ public sealed class Email : Entity
         Id = new EmailId(Guid.NewGuid());
         EmailAddress = emailAddress;
         IsVerified = false;
+        StartAt = DateTime.UtcNow;
     }
 
-    public static Result<Email> Create(string emailAddress)
+    internal static Result<Email> Create(string emailAddress)
     {
         var validationResult = Validate(emailAddress);
+
         if (validationResult.IsFailure)
             return Result<Email>.Failure(validationResult.Errors);
 
         return Result<Email>.Success(new Email(emailAddress.Trim().ToLowerInvariant()));
     }
 
-    public Result Verify()
+    internal Result Verify()
     {
         if (IsVerified)
             return Result.Failure(EmailError.AlreadyVerified);
@@ -37,9 +40,10 @@ public sealed class Email : Entity
         return Result.Success();
     }
 
-    public Result ChangeEmail(string newEmailAddress)
+    internal Result ChangeEmail(string newEmailAddress)
     {
         var validationResult = Validate(newEmailAddress);
+
         if (validationResult.IsFailure)
             return Result.Failure(validationResult.Errors);
 
@@ -60,4 +64,3 @@ public sealed class Email : Entity
         return Result.Success();
     }
 }
-
