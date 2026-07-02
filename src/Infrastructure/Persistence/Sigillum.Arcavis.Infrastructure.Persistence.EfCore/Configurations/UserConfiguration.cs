@@ -3,16 +3,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sigillum.Arcavis.Core.Domain.Users;
 using Sigillum.Arcavis.Core.Domain.Users.Emails;
 using Sigillum.Arcavis.Core.Domain.Users.Passwords;
-using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Configurations.Base;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Configurations;
 
-internal sealed class UserConfiguration : BaseConfiguration<User>
+internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     private const string Emails = "_emails";
     private const string Passwords = "_passwords";
 
-    protected override void ConfigureEntity(EntityTypeBuilder<User> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("USER");
 
@@ -40,8 +39,6 @@ internal sealed class UserConfiguration : BaseConfiguration<User>
     {
         builder.OwnsMany<Email>(Emails, email =>
         {
-            AuditConfiguration.Configure(email);
-
             email.ToTable("USER_EMAIL");
 
             email.HasKey(x => x.Id);
@@ -67,12 +64,16 @@ internal sealed class UserConfiguration : BaseConfiguration<User>
                 .IsRequired()
                 .HasColumnOrder(7);
 
-            email.Property<Guid>("USER_ID")
+            email.Property<UserId>("USER_ID")
                 .HasColumnName("USER_ID")
+                .HasConversion(
+                    id => id.Value,
+                    value => new UserId(value))
                 .HasColumnOrder(8);
 
             email.WithOwner()
-                .HasForeignKey("USER_ID");
+                .HasForeignKey("USER_ID")
+                .HasPrincipalKey(x => x.Id);
 
             email.HasIndex(x => x.EmailAddress)
                 .IsUnique();
@@ -83,8 +84,6 @@ internal sealed class UserConfiguration : BaseConfiguration<User>
     {
         builder.OwnsMany<Password>(Passwords, password =>
         {
-            AuditConfiguration.Configure(password);
-
             password.ToTable("USER_PASSWORD");
             password.HasKey(x => x.Id);
 
@@ -105,12 +104,16 @@ internal sealed class UserConfiguration : BaseConfiguration<User>
                 .IsRequired()
                 .HasColumnOrder(6);
 
-            password.Property<Guid>("USER_ID")
+            password.Property<UserId>("USER_ID")
                 .HasColumnName("USER_ID")
+                .HasConversion(
+                    id => id.Value,
+                    value => new UserId(value))
                 .HasColumnOrder(7);
 
             password.WithOwner()
-                .HasForeignKey("USER_ID");
+                .HasForeignKey("USER_ID")
+                .HasPrincipalKey(x => x.Id);
         });
     }
 }

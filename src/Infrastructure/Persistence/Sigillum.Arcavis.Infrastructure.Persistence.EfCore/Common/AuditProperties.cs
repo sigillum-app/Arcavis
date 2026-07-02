@@ -1,4 +1,4 @@
-﻿namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Configurations.Base;
+﻿namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Common;
 
 internal static class AuditProperties
 {

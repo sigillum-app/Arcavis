@@ -1,4 +1,4 @@
-using MassTransit.Mediator;
+using Mediator;
 using Sigillum.Arcavis.Core.Application.Features.Outboxes.Commands.ProcessMessages;
 
 namespace Sigillum.Arcavis.Presentation.Worker;

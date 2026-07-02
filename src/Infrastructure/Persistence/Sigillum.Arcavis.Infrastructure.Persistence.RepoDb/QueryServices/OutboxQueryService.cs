@@ -24,7 +24,6 @@ internal sealed class OutboxQueryService : IOutboxQueryService
                 ""ERROR"", ""RETRY_COUNT"", ""MAX_RETRY_COUNT"", ""NEXT_RETRY_AT"" 
             FROM ""OUTBOX_MESSAGE"" 
             WHERE ""PROCESSED_AT"" IS NULL 
-              AND ""IS_DELETED"" = FALSE
               AND (""NEXT_RETRY_AT"" IS NULL OR ""NEXT_RETRY_AT"" <= @Now)
               AND ""RETRY_COUNT"" < ""MAX_RETRY_COUNT""
             ORDER BY ""OCCURRED_AT"" ASC 

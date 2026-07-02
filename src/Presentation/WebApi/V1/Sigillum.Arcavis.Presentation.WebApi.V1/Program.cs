@@ -1,3 +1,4 @@
+using Scalar.AspNetCore;
 using Sigillum.Arcavis.Core.Application;
 using Sigillum.Arcavis.Infrastructure;
 
@@ -18,6 +19,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference(options =>
+    {
+        options
+            .WithTitle("Arcavis API Documentation")
+            .WithTheme(ScalarTheme.DeepSpace)
+            .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+    });
 }
 
 app.UseHttpsRedirection();

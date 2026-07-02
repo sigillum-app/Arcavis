@@ -29,7 +29,7 @@ public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavio
     }
     #endregion
 
-    public async ValueTask<TResponse> Handle(TRequest message,MessageHandlerDelegate<TRequest, TResponse> next, CancellationToken cancellationToken)
+    public async ValueTask<TResponse> Handle(TRequest message, MessageHandlerDelegate<TRequest, TResponse> next, CancellationToken cancellationToken)
     {
         var response = await next(message, cancellationToken);
 
@@ -53,7 +53,7 @@ public class DomainEventToOutboxBehavior<TRequest, TResponse> : IPipelineBehavio
 
             await _outbox.AddAsync(
                 mapper.EventName,
-                JsonSerializer.Serialize(integrationEvent),
+                JsonSerializer.Serialize(integrationEvent, integrationEvent.GetType()),
                 domainEvent.OccurredAt,
                 cancellationToken);
 

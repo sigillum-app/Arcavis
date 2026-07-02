@@ -19,7 +19,8 @@ public static class ApplicationRegistration
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>))
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
+                .AddScoped(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>))
                 .AddScoped(typeof(IPipelineBehavior<,>), typeof(DomainEventToOutboxBehavior<,>));
 
         services.AddScoped<IIntegrationEventMapper, UserRegisteredIntegrationEventMapper>();

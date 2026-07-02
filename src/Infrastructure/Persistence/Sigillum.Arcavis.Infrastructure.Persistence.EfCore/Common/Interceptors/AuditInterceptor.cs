@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Configurations.Base;
 
-namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Interceptors;
+namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Common.Interceptors;
 
 internal sealed class AuditInterceptor : SaveChangesInterceptor
 {

@@ -1,17 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Configurations.Base;
+using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Common;
 using Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Outbox;
 
 namespace Sigillum.Arcavis.Infrastructure.Persistence.EfCore.Configurations;
 
-internal sealed class OutboxMessageConfiguration : BaseConfiguration<OutboxMessage>
+internal sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<OutboxMessage>
 {
-    protected override void ConfigureEntity(EntityTypeBuilder<OutboxMessage> builder)
+    public void Configure(EntityTypeBuilder<OutboxMessage> builder)
     {
         builder.ToTable("OUTBOX_MESSAGE");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).HasColumnName("ID").HasColumnOrder(0);
+        builder.Property<DateTime>(AuditProperties.CreatedAt).HasColumnOrder(1);
+        builder.Property<Guid?>(AuditProperties.CreatedBy).HasColumnOrder(2);
+        builder.Property<DateTime>(AuditProperties.UpdatedAt).HasColumnOrder(3);
+        builder.Property<Guid?>(AuditProperties.UpdatedBy).HasColumnOrder(4);
         builder.Property(x => x.Type).HasColumnName("TYPE").HasColumnOrder(5);
         builder.Property(x => x.Payload).HasColumnName("PAYLOAD").HasColumnOrder(6);
         builder.Property(x => x.OccurredAt).HasColumnName("OCCURRED_AT").HasColumnOrder(7);
